@@ -12,6 +12,12 @@
     a { text-decoration: none; color: inherit; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 10; }
 
+    /* --- КАСТОМНЫЙ СКРОЛЛБАР --- */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #050b14; }
+    ::-webkit-scrollbar-thumb { background: rgba(42, 207, 196, 0.4); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: #2acfc4; }
+
     /* --- АНИМИРОВАННЫЙ ЖИВОЙ ФОН --- */
     .bg-animation { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; overflow: hidden; background: #050b14; }
     .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; transition: transform 0.5s ease-out; }
@@ -39,7 +45,7 @@
     nav a:hover { color: #ffffff; }
     .header-phone { font-weight: 600; font-size: 15px; letter-spacing: 1px; }
 
-    /* --- SCROLL REVEAL (Анимация появления) --- */
+    /* --- SCROLL REVEAL --- */
     .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -50,31 +56,43 @@
     .hero-text h1 strong { font-weight: 700; background: linear-gradient(to right, #ffffff, #2acfc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-text p { font-size: 17px; color: rgba(255, 255, 255, 0.7); margin-bottom: 40px; font-weight: 300; max-width: 480px; }
 
-    /* --- ПРЕИМУЩЕСТВА --- */
-    .features { padding: 80px 0; }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-    .features .glass-panel { transition: transform 0.3s ease; }
-    .features .glass-panel:hover { transform: translateY(-10px); }
-    .feature-icon { font-size: 30px; margin-bottom: 20px; color: #2acfc4; }
-
-    /* --- ИНТЕРАКТИВ ДО / ПОСЛЕ --- */
-    .portfolio { padding: 80px 0; text-align: center; }
+    /* --- ВРАЧИ (НОВЫЙ БЛОК) --- */
+    .team { padding: 80px 0; }
     .section-title { margin-bottom: 50px; text-align: center; }
     .section-title h2 { font-size: 36px; font-weight: 300; }
-    .ba-container { position: relative; max-width: 800px; height: 450px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); }
-    /* Временные стили заглушек. Потом заменим на фото */
-    .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; color: rgba(255,255,255,0.3); }
-    .ba-after { background: linear-gradient(135deg, #188a83, #0b3954); z-index: 1; }
-    .ba-before { background: #1a1d21; z-index: 2; clip-path: inset(0 50% 0 0); }
-    .ba-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; outline: none; background: transparent; -webkit-appearance: none; z-index: 4; cursor: ew-resize; margin: 0; }
-    .ba-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 4px; height: 450px; background: transparent; cursor: ew-resize; }
-    .ba-line { position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: #ffffff; z-index: 3; transform: translateX(-50%); pointer-events: none; box-shadow: 0 0 10px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
-    .ba-btn { width: 40px; height: 40px; background: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #11625d; font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+    .team-card { text-align: center; padding: 30px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .team-card:hover { transform: translateY(-10px) scale(1.02); border-color: rgba(42, 207, 196, 0.5); box-shadow: 0 20px 40px rgba(17, 98, 93, 0.2); }
+    .team-avatar { width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #188a83, #0b3954); margin: 0 auto 20px; border: 3px solid rgba(42, 207, 196, 0.3); display: flex; align-items: center; justify-content: center; font-size: 40px; color: rgba(255,255,255,0.2); }
+    .team-card h3 { font-size: 20px; font-weight: 500; margin-bottom: 5px; }
+    .team-card p { font-size: 14px; color: #2acfc4; font-weight: 500; margin-bottom: 10px; }
+    .team-card span { font-size: 13px; color: rgba(255,255,255,0.5); }
 
-    /* --- БЕСШОВНЫЕ ВКЛАДКИ УСЛУГ (ТАБЫ) --- */
+    /* --- ОТЗЫВЫ (НОВЫЙ БЛОК) --- */
+    .reviews { padding: 80px 0; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+    .review-card { position: relative; }
+    .stars { color: #2acfc4; font-size: 20px; margin-bottom: 15px; letter-spacing: 2px; }
+    .review-text { font-size: 15px; color: rgba(255,255,255,0.8); font-style: italic; margin-bottom: 20px; }
+    .review-author { font-weight: 600; font-size: 16px; }
+    .review-date { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+    /* --- ВОПРОСЫ И ОТВЕТЫ (АККОРДЕОН - НОВЫЙ БЛОК) --- */
+    .faq { padding: 80px 0; }
+    .faq-container { max-width: 800px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; cursor: pointer; }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { display: flex; justify-content: space-between; align-items: center; font-weight: 500; font-size: 18px; transition: color 0.3s; }
+    .faq-item:hover .faq-question { color: #2acfc4; }
+    .faq-icon { font-size: 24px; color: #2acfc4; transition: transform 0.4s ease; font-weight: 300; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, margin-top 0.4s ease; color: rgba(255,255,255,0.6); font-size: 15px; }
+    .faq-item.active .faq-answer { max-height: 200px; margin-top: 15px; }
+    .faq-item.active .faq-icon { transform: rotate(45deg); } /* Плюс превращается в крестик */
+
+    /* --- ТАБЫ (УСЛУГИ) --- */
     .services { padding: 80px 0; }
     .tabs-header { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-    .tab-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 12px 24px; border-radius: 30px; cursor: pointer; transition: all 0.3s; font-family: 'Montserrat'; font-weight: 500; }
+    .tab-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 12px 24px; border-radius: 30px; cursor: pointer; transition: all 0.3s; font-weight: 500; }
     .tab-btn.active, .tab-btn:hover { background: #2acfc4; border-color: #2acfc4; color: #000; }
     .tab-content { display: none; animation: fadeIn 0.5s ease; }
     .tab-content.active { display: block; }
@@ -82,15 +100,15 @@
     .service-row { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
     .service-row:last-child { border-bottom: none; }
     .service-info h3 { font-size: 17px; font-weight: 500; margin-bottom: 5px; }
-    .service-info p { font-size: 14px; color: rgba(255, 255, 255, 0.5); font-weight: 300; }
+    .service-info p { font-size: 14px; color: rgba(255, 255, 255, 0.5); }
     .service-price { font-size: 20px; font-weight: 600; color: #2acfc4; white-space: nowrap; margin-left: 20px; }
 
-    /* --- ПЛАВАЮЩАЯ КНОПКА СВЯЗИ (FAB) --- */
+    /* --- ПЛАВАЮЩАЯ КНОПКА (FAB) --- */
     .fab { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #2acfc4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 10px 20px rgba(42, 207, 196, 0.4); z-index: 999; cursor: pointer; transition: transform 0.3s ease; animation: pulse 2s infinite; color: #000; }
     .fab:hover { transform: scale(1.1); }
     @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(42, 207, 196, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(42, 207, 196, 0); } 100% { box-shadow: 0 0 0 0 rgba(42, 207, 196, 0); } }
 
-    /* --- ПОДВАЛ И КОНТАКТЫ --- */
+    /* --- КОНТАКТЫ --- */
     .contacts { padding: 80px 0 100px; }
     .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
     .contact-item { margin-bottom: 30px; }
@@ -103,10 +121,6 @@
       .hero-grid, .contacts-grid { grid-template-columns: 1fr; }
       .header-content { flex-direction: column; padding: 20px; gap: 15px; border-radius: 20px; }
       nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
-    }
-    @media (max-width: 600px) {
-      .service-row { flex-direction: column; align-items: flex-start; gap: 10px; }
-      .service-price { margin-left: 0; }
     }
   </style>
 </head>
@@ -126,9 +140,9 @@
         <div class="logo">Denta<span>Clinic</span></div>
         <nav>
           <ul>
-            <li><a href="#about">О клинике</a></li>
-            <li><a href="#portfolio">Результаты</a></li>
+            <li><a href="#team">Врачи</a></li>
             <li><a href="#services">Услуги</a></li>
+            <li><a href="#reviews">Отзывы</a></li>
           </ul>
         </nav>
         <div class="header-phone">+7 (900) 123-45-67</div>
@@ -136,7 +150,6 @@
     </div>
   </header>
 
-  <!-- Плавающая кнопка -->
   <a href="tel:+79001234567" class="fab">📞</a>
 
   <section class="hero">
@@ -148,7 +161,7 @@
       </div>
       <div class="glass-panel reveal" style="transition-delay: 0.2s;">
         <h3 style="font-size: 24px; font-weight: 500; margin-bottom: 15px;">Запись на прием</h3>
-        <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px; font-weight: 300;">Свяжитесь с нами прямо сейчас.</p>
+        <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px; font-weight: 300;">Свяжитесь с нами для выбора удобного времени.</p>
         <div style="display: flex; flex-direction: column; gap: 15px;">
           <a href="tel:+79001234567" class="btn">Позвонить</a>
         </div>
@@ -156,48 +169,36 @@
     </div>
   </section>
 
-  <section class="features" id="about">
-    <div class="container">
-      <div class="features-grid">
-        <div class="glass-panel reveal">
-          <div class="feature-icon">🔍</div>
-          <h3>Точная диагностика</h3>
-          <p>Безошибочное выявление проблем на самых ранних стадиях.</p>
-        </div>
-        <div class="glass-panel reveal" style="transition-delay: 0.2s;">
-          <div class="feature-icon">💎</div>
-          <h3>Мировые стандарты</h3>
-          <p>Материалы премиум-класса, гарантирующие долговечность.</p>
-        </div>
-        <div class="glass-panel reveal" style="transition-delay: 0.4s;">
-          <div class="feature-icon">🛡️</div>
-          <h3>Абсолютный комфорт</h3>
-          <p>Лечение без стресса с применением безопасной анестезии.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Интерактивный блок До/После -->
-  <section class="portfolio" id="portfolio">
+  <!-- БЛОК: ВРАЧИ -->
+  <section class="team" id="team">
     <div class="container reveal">
       <div class="section-title">
-        <h2>Реставрация улыбки</h2>
-        <p style="color: rgba(255,255,255,0.6); margin-top: 10px;">Потяните ползунок, чтобы увидеть результат</p>
+        <h2>Наши специалисты</h2>
       </div>
-      <div class="ba-container">
-        <!-- Сюда потом вставим реальные теги <img> -->
-        <div class="ba-img ba-after">ПОСЛЕ</div>
-        <div class="ba-img ba-before" id="before-img">ДО</div>
-        <div class="ba-line" id="ba-line">
-          <div class="ba-btn">↔</div>
+      <div class="team-grid">
+        <div class="glass-panel team-card">
+          <div class="team-avatar">👨‍⚕️</div>
+          <h3>Иванов Иван</h3>
+          <p>Главный врач, Хирург</p>
+          <span>Опыт работы: 15 лет</span>
         </div>
-        <input type="range" min="0" max="100" value="50" class="ba-slider" id="ba-slider">
+        <div class="glass-panel team-card">
+          <div class="team-avatar">👩‍⚕️</div>
+          <h3>Смирнова Анна</h3>
+          <p>Стоматолог-терапевт</p>
+          <span>Опыт работы: 8 лет</span>
+        </div>
+        <div class="glass-panel team-card">
+          <div class="team-avatar">👨‍⚕️</div>
+          <h3>Петров Алексей</h3>
+          <p>Ортопед, Имплантолог</p>
+          <span>Опыт работы: 12 лет</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Вкладки с прайс-листом -->
+  <!-- БЛОК: УСЛУГИ (ТАБЫ) -->
   <section class="services" id="services">
     <div class="container reveal">
       <div class="glass-panel">
@@ -213,46 +214,90 @@
 
         <div id="therapy" class="tab-content active">
           <div class="service-row">
-            <div class="service-info">
-              <h3>Лечение кариеса</h3><p>Светоотверждаемая пломба и полировка</p>
-            </div>
+            <div class="service-info"><h3>Лечение кариеса</h3><p>Светоотверждаемая пломба и полировка</p></div>
             <div class="service-price">от 3 500 ₽</div>
           </div>
           <div class="service-row">
-            <div class="service-info">
-              <h3>Эстетическая реставрация</h3><p>Восстановление формы зуба</p>
-            </div>
+            <div class="service-info"><h3>Эстетическая реставрация</h3><p>Восстановление формы зуба</p></div>
             <div class="service-price">от 5 000 ₽</div>
           </div>
         </div>
 
         <div id="hygiene" class="tab-content">
           <div class="service-row">
-            <div class="service-info">
-              <h3>Комплексная чистка (AirFlow)</h3><p>Удаление налета и камня</p>
-            </div>
+            <div class="service-info"><h3>Комплексная чистка (AirFlow)</h3><p>Удаление налета и камня</p></div>
             <div class="service-price">4 500 ₽</div>
-          </div>
-          <div class="service-row">
-            <div class="service-info">
-              <h3>Отбеливание ZOOM 4</h3><p>Безопасное осветление на 8 тонов</p>
-            </div>
-            <div class="service-price">25 000 ₽</div>
           </div>
         </div>
 
         <div id="surgery" class="tab-content">
           <div class="service-row">
-            <div class="service-info">
-              <h3>Простое удаление зуба</h3><p>Безболезненное удаление</p>
-            </div>
+            <div class="service-info"><h3>Удаление зуба</h3><p>Безболезненное удаление</p></div>
             <div class="service-price">от 2 000 ₽</div>
           </div>
-          <div class="service-row">
-            <div class="service-info">
-              <h3>Удаление зуба мудрости</h3><p>Сложное атипичное удаление</p>
-            </div>
-            <div class="service-price">от 4 500 ₽</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК: ОТЗЫВЫ -->
+  <section class="reviews" id="reviews">
+    <div class="container reveal">
+      <div class="section-title">
+        <h2>Отзывы пациентов</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="glass-panel review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">«Прекрасная клиника! Лечил сложный зуб, вообще ничего не почувствовал. Врачи очень вежливые, оборудование на высшем уровне.»</p>
+          <p class="review-author">Михаил Д.</p>
+          <p class="review-date">12 мая 2026</p>
+        </div>
+        <div class="glass-panel review-card">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">«Делала проф. чистку AirFlow. Результат супер, зубы стали заметно светлее. Спасибо доктору Анне за аккуратность!»</p>
+          <p class="review-author">Елена В.</p>
+          <p class="review-date">28 апреля 2026</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БЛОК: ЧАСТЫЕ ВОПРОСЫ (АККОРДЕОН) -->
+  <section class="faq">
+    <div class="container reveal">
+      <div class="section-title">
+        <h2>Частые вопросы</h2>
+      </div>
+      <div class="glass-panel faq-container">
+        
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Больно ли лечить зубы?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Абсолютно нет. Мы используем современные анестетики (ультракаин, септанест), которые полностью блокируют болевые ощущения. Вы не почувствуете даже сам момент укола благодаря специальному охлаждающему гелю.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Даете ли вы гарантию на пломбы?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Да, мы предоставляем официальную гарантию от 1 года на все виды терапевтического лечения и реставрации. Мы уверены в качестве наших материалов премиум-класса.
+          </div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-question">
+            <span>Как часто нужно делать чистку?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Стоматологи рекомендуют проводить профессиональную гигиену полости рта раз в 6 месяцев. Это лучшая профилактика кариеса и воспаления десен.
           </div>
         </div>
 
@@ -284,9 +329,9 @@
     </div>
   </footer>
 
-  <!-- СКРИПТЫ ДЛЯ МАГИИ -->
+  <!-- СКРИПТЫ ДЛЯ ИНТЕРАКТИВА -->
   <script>
-    // 1. Живой фон (параллакс от мыши)
+    // Живой фон (параллакс от мыши)
     document.addEventListener('mousemove', (e) => {
       const x = (e.clientX / window.innerWidth - 0.5) * 40;
       const y = (e.clientY / window.innerHeight - 0.5) * 40;
@@ -294,20 +339,20 @@
       document.documentElement.style.setProperty('--my', `${y}px`);
     });
 
-    // 2. Умная шапка
+    // Умная шапка
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
       const currentScroll = window.pageYOffset;
       const header = document.getElementById('header');
       if (currentScroll > lastScroll && currentScroll > 100) {
-        header.classList.add('hidden'); // Скролл вниз - прячем
+        header.classList.add('hidden');
       } else {
-        header.classList.remove('hidden'); // Скролл вверх - показываем
+        header.classList.remove('hidden');
       }
       lastScroll = currentScroll;
     });
 
-    // 3. Анимация появления при скролле (Scroll Reveal)
+    // Анимация появления при скролле (Scroll Reveal)
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -317,22 +362,22 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-    // 4. Слайдер До/После
-    const slider = document.getElementById('ba-slider');
-    const beforeImg = document.getElementById('before-img');
-    const baLine = document.getElementById('ba-line');
-    slider.addEventListener('input', (e) => {
-      const val = e.target.value;
-      beforeImg.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-      baLine.style.left = `${val}%`;
-    });
-
-    // 5. Бесшовные вкладки (Табы)
+    // Бесшовные вкладки (Табы)
     function openTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.getElementById(tabName).classList.add('active');
       event.currentTarget.classList.add('active');
+    }
+
+    // Умный Аккордеон (Вопросы-Ответы)
+    function toggleFaq(element) {
+      // Закрываем все остальные открытые вопросы
+      document.querySelectorAll('.faq-item').forEach(item => {
+        if(item !== element) item.classList.remove('active');
+      });
+      // Открываем/закрываем тот, на который кликнули
+      element.classList.toggle('active');
     }
   </script>
 </body>
