@@ -3,372 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Denta Clinic | Премиальная стоматология</title>
+  <title>Denta Clinic | Premium</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* --- БАЗОВЫЕ СТИЛИ (ТЕМНАЯ ТЕМА) --- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    :root {
-      --bg-main: #121416;
-      --bg-card: #1a1d21;
-      --accent-teal: #1a5e5a;
-      --accent-hover: #134643;
-      --text-main: #e2e4e6;
-      --text-muted: #8b9298;
-      --border-color: #2a2e33;
-    }
-
-    body {
-      color: var(--text-main);
-      line-height: 1.7;
-      background-color: var(--bg-main);
-      -webkit-font-smoothing: antialiased;
-    }
-
+    /* --- БАЗОВЫЕ СТИЛИ --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+    body { color: #ffffff; line-height: 1.6; background-color: #050b14; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     a { text-decoration: none; color: inherit; }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 10; }
+
+    /* --- АНИМИРОВАННЫЙ ЖИВОЙ ФОН --- */
+    .bg-animation { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; overflow: hidden; background: #050b14; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; transition: transform 0.5s ease-out; }
+    .orb-1 { width: 500px; height: 500px; background: #0f5c53; top: -100px; left: -100px; transform: translate(var(--mx, 0), var(--my, 0)); }
+    .orb-2 { width: 600px; height: 600px; background: #0b3954; bottom: -150px; right: -100px; transform: translate(calc(var(--mx, 0) * -1.5), calc(var(--my, 0) * -1.5)); }
+    .orb-3 { width: 400px; height: 400px; background: #144f43; top: 40%; left: 30%; transform: translate(calc(var(--mx, 0) * 0.8), calc(var(--my, 0) * 0.8)); opacity: 0.3; }
+
+    /* --- СТИЛЬ МАТОВОГО СТЕКЛА --- */
+    .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
 
     /* --- КНОПКИ --- */
-    .btn {
-      display: inline-block;
-      padding: 16px 36px;
-      background-color: var(--accent-teal);
-      color: #ffffff;
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      border: none;
-      transition: all 0.4s ease;
-      cursor: pointer;
-      text-align: center;
-    }
+    .btn { display: inline-block; padding: 16px 36px; background: linear-gradient(135deg, #188a83, #11625d); color: #ffffff; font-size: 14px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border: none; border-radius: 50px; transition: all 0.3s ease; cursor: pointer; text-align: center; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(17, 98, 93, 0.4); }
+    .btn-outline { background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: none; }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.1); border-color: #ffffff; }
 
-    .btn:hover {
-      background-color: var(--accent-hover);
-      box-shadow: 0 10px 20px rgba(26, 94, 90, 0.3);
-    }
+    /* --- УМНАЯ ШАПКА --- */
+    header { padding: 20px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: transform 0.4s ease; }
+    header.hidden { transform: translateY(-100%); }
+    .header-content { display: flex; justify-content: space-between; align-items: center; background: rgba(10, 15, 20, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 30px; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+    .logo { font-size: 20px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+    .logo span { color: #2acfc4; }
+    nav ul { display: flex; list-style: none; gap: 30px; }
+    nav a { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: rgba(255, 255, 255, 0.7); transition: color 0.3s; }
+    nav a:hover { color: #ffffff; }
+    .header-phone { font-weight: 600; font-size: 15px; letter-spacing: 1px; }
 
-    .btn-outline {
-      background-color: transparent;
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-    }
+    /* --- SCROLL REVEAL (Анимация появления) --- */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
 
-    .btn-outline:hover {
-      border-color: var(--accent-teal);
-      color: var(--accent-teal);
-    }
-
-    /* --- ШАПКА --- */
-    header {
-      background: rgba(18, 20, 22, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border-color);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 90px;
-    }
-
-    .logo {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-main);
-    }
-
-    .logo span {
-      color: var(--accent-teal);
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 40px;
-    }
-
-    nav a {
-      font-size: 13px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: color 0.3s;
-      color: var(--text-muted);
-    }
-
-    nav a:hover { color: var(--accent-teal); }
-
-    .header-phone {
-      font-weight: 600;
-      font-size: 16px;
-    }
-
-    /* --- ГЛАВНЫЙ ЭКРАН (С АНИМАЦИЕЙ ФОНА) --- */
-    .hero {
-      /* Анимированный градиент */
-      background: linear-gradient(-45deg, #0f1215, #1a2226, #102a28, #121416);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      padding: 120px 0;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .hero-text h1 {
-      font-size: 48px;
-      font-weight: 300;
-      line-height: 1.2;
-      margin-bottom: 24px;
-      color: #ffffff;
-    }
-
-    .hero-text h1 strong {
-      font-weight: 600;
-      color: var(--accent-teal);
-    }
-
-    .hero-text p {
-      font-size: 16px;
-      color: var(--text-muted);
-      margin-bottom: 40px;
-      font-weight: 300;
-      max-width: 450px;
-    }
-
-    /* Информационная карточка вместо формы */
-    .hero-card {
-      background: var(--bg-card);
-      padding: 40px;
-      border: 1px solid var(--border-color);
-    }
-
-    .hero-card h3 {
-      font-size: 22px;
-      font-weight: 500;
-      margin-bottom: 15px;
-      color: #ffffff;
-    }
-    
-    .hero-card p {
-      color: var(--text-muted);
-      font-size: 14px;
-      margin-bottom: 30px;
-      line-height: 1.6;
-    }
-
-    .action-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+    /* --- ГЛАВНЫЙ ЭКРАН --- */
+    .hero { padding: 150px 0 100px; min-height: 100vh; display: flex; align-items: center; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
+    .hero-text h1 { font-size: 52px; font-weight: 300; line-height: 1.15; margin-bottom: 30px; }
+    .hero-text h1 strong { font-weight: 700; background: linear-gradient(to right, #ffffff, #2acfc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-text p { font-size: 17px; color: rgba(255, 255, 255, 0.7); margin-bottom: 40px; font-weight: 300; max-width: 480px; }
 
     /* --- ПРЕИМУЩЕСТВА --- */
-    .features {
-      padding: 100px 0;
-    }
+    .features { padding: 80px 0; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+    .features .glass-panel { transition: transform 0.3s ease; }
+    .features .glass-panel:hover { transform: translateY(-10px); }
+    .feature-icon { font-size: 30px; margin-bottom: 20px; color: #2acfc4; }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-    }
+    /* --- ИНТЕРАКТИВ ДО / ПОСЛЕ --- */
+    .portfolio { padding: 80px 0; text-align: center; }
+    .section-title { margin-bottom: 50px; text-align: center; }
+    .section-title h2 { font-size: 36px; font-weight: 300; }
+    .ba-container { position: relative; max-width: 800px; height: 450px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); }
+    /* Временные стили заглушек. Потом заменим на фото */
+    .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; color: rgba(255,255,255,0.3); }
+    .ba-after { background: linear-gradient(135deg, #188a83, #0b3954); z-index: 1; }
+    .ba-before { background: #1a1d21; z-index: 2; clip-path: inset(0 50% 0 0); }
+    .ba-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; outline: none; background: transparent; -webkit-appearance: none; z-index: 4; cursor: ew-resize; margin: 0; }
+    .ba-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 4px; height: 450px; background: transparent; cursor: ew-resize; }
+    .ba-line { position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: #ffffff; z-index: 3; transform: translateX(-50%); pointer-events: none; box-shadow: 0 0 10px rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; }
+    .ba-btn { width: 40px; height: 40px; background: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #11625d; font-size: 24px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
-    .feature-card {
-      padding: 30px;
-      background: var(--bg-card);
-      border-top: 2px solid var(--accent-teal);
-    }
+    /* --- БЕСШОВНЫЕ ВКЛАДКИ УСЛУГ (ТАБЫ) --- */
+    .services { padding: 80px 0; }
+    .tabs-header { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
+    .tab-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 12px 24px; border-radius: 30px; cursor: pointer; transition: all 0.3s; font-family: 'Montserrat'; font-weight: 500; }
+    .tab-btn.active, .tab-btn:hover { background: #2acfc4; border-color: #2acfc4; color: #000; }
+    .tab-content { display: none; animation: fadeIn 0.5s ease; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .service-row { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .service-row:last-child { border-bottom: none; }
+    .service-info h3 { font-size: 17px; font-weight: 500; margin-bottom: 5px; }
+    .service-info p { font-size: 14px; color: rgba(255, 255, 255, 0.5); font-weight: 300; }
+    .service-price { font-size: 20px; font-weight: 600; color: #2acfc4; white-space: nowrap; margin-left: 20px; }
 
-    .feature-card h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 15px;
-      color: #ffffff;
-    }
+    /* --- ПЛАВАЮЩАЯ КНОПКА СВЯЗИ (FAB) --- */
+    .fab { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #2acfc4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 10px 20px rgba(42, 207, 196, 0.4); z-index: 999; cursor: pointer; transition: transform 0.3s ease; animation: pulse 2s infinite; color: #000; }
+    .fab:hover { transform: scale(1.1); }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(42, 207, 196, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(42, 207, 196, 0); } 100% { box-shadow: 0 0 0 0 rgba(42, 207, 196, 0); } }
 
-    .feature-card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.8;
-    }
-
-    /* --- УСЛУГИ И ЦЕНЫ --- */
-    .services { 
-      padding: 100px 0; 
-      background: var(--bg-card);
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .section-title {
-      margin-bottom: 60px;
-      text-align: center;
-    }
-
-    .section-title h2 {
-      font-size: 36px;
-      font-weight: 300;
-      color: #ffffff;
-    }
-
-    .services-list {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .service-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border-color);
-    }
-    
-    .service-row:last-child {
-      border-bottom: none;
-    }
-
-    .service-info h3 {
-      font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 5px;
-      color: var(--text-main);
-    }
-
-    .service-info p {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    .service-price {
-      font-size: 20px;
-      font-weight: 600;
-      color: var(--accent-teal);
-      white-space: nowrap;
-      margin-left: 20px;
-    }
-
-    /* --- КОНТАКТЫ --- */
-    .contacts {
-      padding: 100px 0;
-    }
-
-    .contacts-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-    }
-
-    .contact-item {
-      margin-bottom: 30px;
-    }
-
-    .contact-item h4 {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--text-muted);
-      margin-bottom: 5px;
-    }
-
-    .contact-item p { 
-      font-size: 18px; 
-      font-weight: 300; 
-      color: #ffffff;
-    }
-
-    .map-box {
-      border: 1px solid var(--border-color); 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      min-height: 300px; 
-      background: var(--bg-card);
-    }
-
-    /* --- ПОДВАЛ --- */
-    footer {
-      background: #0a0b0d;
-      color: var(--text-muted);
-      padding: 40px 0;
-      text-align: center;
-      font-size: 13px;
-    }
+    /* --- ПОДВАЛ И КОНТАКТЫ --- */
+    .contacts { padding: 80px 0 100px; }
+    .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .contact-item { margin-bottom: 30px; }
+    .contact-item h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.5); margin-bottom: 5px; }
+    .contact-item p { font-size: 18px; font-weight: 400; }
+    footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); position: relative; z-index: 10; }
 
     /* --- АДАПТИВНОСТЬ --- */
-    @media (max-width: 768px) {
-      .header-content { flex-direction: column; height: auto; padding: 20px 0; gap: 20px; }
-      nav ul { gap: 20px; flex-wrap: wrap; justify-content: center; }
+    @media (max-width: 900px) {
       .hero-grid, .contacts-grid { grid-template-columns: 1fr; }
-      .hero { padding: 60px 0; }
-      .hero-text h1 { font-size: 36px; }
-      .service-row { flex-direction: column; align-items: flex-start; gap: 15px; }
+      .header-content { flex-direction: column; padding: 20px; gap: 15px; border-radius: 20px; }
+      nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+    }
+    @media (max-width: 600px) {
+      .service-row { flex-direction: column; align-items: flex-start; gap: 10px; }
       .service-price { margin-left: 0; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="container header-content">
-      <div class="logo">Denta<span>Clinic</span></div>
-      <nav>
-        <ul>
-          <li><a href="#about">О клинике</a></li>
-          <li><a href="#services">Услуги</a></li>
-          <li><a href="#contacts">Контакты</a></li>
-        </ul>
-      </nav>
-      <div class="header-phone">+7 (900) 123-45-67</div>
+  <!-- Анимированный фон -->
+  <div class="bg-animation">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Умная шапка -->
+  <header id="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">Denta<span>Clinic</span></div>
+        <nav>
+          <ul>
+            <li><a href="#about">О клинике</a></li>
+            <li><a href="#portfolio">Результаты</a></li>
+            <li><a href="#services">Услуги</a></li>
+          </ul>
+        </nav>
+        <div class="header-phone">+7 (900) 123-45-67</div>
+      </div>
     </div>
   </header>
 
+  <!-- Плавающая кнопка -->
+  <a href="tel:+79001234567" class="fab">📞</a>
+
   <section class="hero">
     <div class="container hero-grid">
-      <div class="hero-text">
-        <h1>Эстетика и здоровье <strong>в каждой детали</strong></h1>
-        <p>Современные протоколы лечения, премиальное оборудование и команда экспертов. Мы создаем улыбки, которыми гордятся.</p>
+      <div class="hero-text reveal">
+        <h1>Эстетика и здоровье <br><strong>в каждой детали</strong></h1>
+        <p>Индивидуальный подход к вашей улыбке в атмосфере полного спокойствия и комфорта.</p>
         <a href="#services" class="btn btn-outline">Посмотреть прайс</a>
       </div>
-      
-      <!-- Информационная карточка -->
-      <div class="hero-card">
-        <h3>Запись на прием</h3>
-        <p>Свяжитесь с администратором клиники для выбора удобного времени консультации.</p>
-        <div class="action-buttons">
+      <div class="glass-panel reveal" style="transition-delay: 0.2s;">
+        <h3 style="font-size: 24px; font-weight: 500; margin-bottom: 15px;">Запись на прием</h3>
+        <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px; font-weight: 300;">Свяжитесь с нами прямо сейчас.</p>
+        <div style="display: flex; flex-direction: column; gap: 15px;">
           <a href="tel:+79001234567" class="btn">Позвонить</a>
-          <a href="#" class="btn btn-outline">Написать в WhatsApp</a>
         </div>
       </div>
     </div>
@@ -377,59 +159,101 @@
   <section class="features" id="about">
     <div class="container">
       <div class="features-grid">
-        <div class="feature-card">
+        <div class="glass-panel reveal">
+          <div class="feature-icon">🔍</div>
           <h3>Точная диагностика</h3>
-          <p>Используем дентальные микроскопы и 3D-томографию для безошибочного выявления проблем на самых ранних стадиях.</p>
+          <p>Безошибочное выявление проблем на самых ранних стадиях.</p>
         </div>
-        <div class="feature-card">
+        <div class="glass-panel reveal" style="transition-delay: 0.2s;">
+          <div class="feature-icon">💎</div>
           <h3>Мировые стандарты</h3>
-          <p>Применяем сертифицированные европейские и японские материалы, гарантирующие долговечность и безупречную эстетику.</p>
+          <p>Материалы премиум-класса, гарантирующие долговечность.</p>
         </div>
-        <div class="feature-card">
+        <div class="glass-panel reveal" style="transition-delay: 0.4s;">
+          <div class="feature-icon">🛡️</div>
           <h3>Абсолютный комфорт</h3>
-          <p>Лечение проходит в атмосфере спокойствия с применением многоступенчатой и безопасной анестезии.</p>
+          <p>Лечение без стресса с применением безопасной анестезии.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="services" id="services">
-    <div class="container">
+  <!-- Интерактивный блок До/После -->
+  <section class="portfolio" id="portfolio">
+    <div class="container reveal">
       <div class="section-title">
-        <h2>Прайс-лист</h2>
+        <h2>Реставрация улыбки</h2>
+        <p style="color: rgba(255,255,255,0.6); margin-top: 10px;">Потяните ползунок, чтобы увидеть результат</p>
       </div>
-      <div class="services-list">
+      <div class="ba-container">
+        <!-- Сюда потом вставим реальные теги <img> -->
+        <div class="ba-img ba-after">ПОСЛЕ</div>
+        <div class="ba-img ba-before" id="before-img">ДО</div>
+        <div class="ba-line" id="ba-line">
+          <div class="ba-btn">↔</div>
+        </div>
+        <input type="range" min="0" max="100" value="50" class="ba-slider" id="ba-slider">
+      </div>
+    </div>
+  </section>
+
+  <!-- Вкладки с прайс-листом -->
+  <section class="services" id="services">
+    <div class="container reveal">
+      <div class="glass-panel">
+        <div class="section-title" style="margin-bottom: 30px;">
+          <h2>Наши услуги</h2>
+        </div>
         
-        <div class="service-row">
-          <div class="service-info">
-            <h3>Первичная консультация и план лечения</h3>
-            <p>Осмотр главным врачом, составление детального плана</p>
-          </div>
-          <div class="service-price">1 500 ₽</div>
+        <div class="tabs-header">
+          <button class="tab-btn active" onclick="openTab('therapy')">Терапия</button>
+          <button class="tab-btn" onclick="openTab('hygiene')">Гигиена</button>
+          <button class="tab-btn" onclick="openTab('surgery')">Хирургия</button>
         </div>
 
-        <div class="service-row">
-          <div class="service-info">
-            <h3>Профессиональная гигиена полости рта</h3>
-            <p>AirFlow, ультразвук, полировка и фторирование эмали</p>
+        <div id="therapy" class="tab-content active">
+          <div class="service-row">
+            <div class="service-info">
+              <h3>Лечение кариеса</h3><p>Светоотверждаемая пломба и полировка</p>
+            </div>
+            <div class="service-price">от 3 500 ₽</div>
           </div>
-          <div class="service-price">от 4 500 ₽</div>
+          <div class="service-row">
+            <div class="service-info">
+              <h3>Эстетическая реставрация</h3><p>Восстановление формы зуба</p>
+            </div>
+            <div class="service-price">от 5 000 ₽</div>
+          </div>
         </div>
 
-        <div class="service-row">
-          <div class="service-info">
-            <h3>Эстетическая реставрация зуба</h3>
-            <p>Восстановление анатомической формы светоотверждаемым композитом</p>
+        <div id="hygiene" class="tab-content">
+          <div class="service-row">
+            <div class="service-info">
+              <h3>Комплексная чистка (AirFlow)</h3><p>Удаление налета и камня</p>
+            </div>
+            <div class="service-price">4 500 ₽</div>
           </div>
-          <div class="service-price">от 5 000 ₽</div>
+          <div class="service-row">
+            <div class="service-info">
+              <h3>Отбеливание ZOOM 4</h3><p>Безопасное осветление на 8 тонов</p>
+            </div>
+            <div class="service-price">25 000 ₽</div>
+          </div>
         </div>
 
-        <div class="service-row">
-          <div class="service-info">
-            <h3>Атравматичное удаление зуба</h3>
-            <p>Безболезненное удаление с сохранением костной ткани</p>
+        <div id="surgery" class="tab-content">
+          <div class="service-row">
+            <div class="service-info">
+              <h3>Простое удаление зуба</h3><p>Безболезненное удаление</p>
+            </div>
+            <div class="service-price">от 2 000 ₽</div>
           </div>
-          <div class="service-price">от 3 500 ₽</div>
+          <div class="service-row">
+            <div class="service-info">
+              <h3>Удаление зуба мудрости</h3><p>Сложное атипичное удаление</p>
+            </div>
+            <div class="service-price">от 4 500 ₽</div>
+          </div>
         </div>
 
       </div>
@@ -437,27 +261,18 @@
   </section>
 
   <section class="contacts" id="contacts">
-    <div class="container">
+    <div class="container reveal">
       <div class="section-title">
         <h2>Ждем вас на приеме</h2>
       </div>
       <div class="contacts-grid">
-        <div class="contact-info">
-          <div class="contact-item">
-            <h4>Адрес клиники</h4>
-            <p>г. Свободный, ул. Ленина, д. 10</p>
-          </div>
-          <div class="contact-item">
-            <h4>Телефон для записи</h4>
-            <p>+7 (900) 123-45-67</p>
-          </div>
-          <div class="contact-item">
-            <h4>Режим работы</h4>
-            <p>Ежедневно с 09:00 до 20:00</p>
-          </div>
+        <div class="glass-panel">
+          <div class="contact-item"><h4>Адрес</h4><p>г. Свободный, ул. Ленина, д. 10</p></div>
+          <div class="contact-item"><h4>Телефон</h4><p>+7 (900) 123-45-67</p></div>
+          <div class="contact-item"><h4>Режим работы</h4><p>Ежедневно с 09:00 до 20:00</p></div>
         </div>
-        <div class="map-box">
-          <p style="color: var(--text-muted); font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Место для Яндекс.Карт</p>
+        <div class="glass-panel" style="display:flex; align-items:center; justify-content:center;">
+          <p style="color:rgba(255,255,255,0.4); font-size:14px; letter-spacing:1px;">Здесь будет карта</p>
         </div>
       </div>
     </div>
@@ -465,9 +280,60 @@
 
   <footer>
     <div class="container">
-      <p>&copy; 2026 Denta Clinic. Лицензия ЛО-XX-XX-XXXXXX. Имеются противопоказания, необходима консультация специалиста.</p>
+      <p>&copy; 2026 Denta Clinic. Все права защищены.</p>
     </div>
   </footer>
 
+  <!-- СКРИПТЫ ДЛЯ МАГИИ -->
+  <script>
+    // 1. Живой фон (параллакс от мыши)
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 40;
+      const y = (e.clientY / window.innerHeight - 0.5) * 40;
+      document.documentElement.style.setProperty('--mx', `${x}px`);
+      document.documentElement.style.setProperty('--my', `${y}px`);
+    });
+
+    // 2. Умная шапка
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      const header = document.getElementById('header');
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        header.classList.add('hidden'); // Скролл вниз - прячем
+      } else {
+        header.classList.remove('hidden'); // Скролл вверх - показываем
+      }
+      lastScroll = currentScroll;
+    });
+
+    // 3. Анимация появления при скролле (Scroll Reveal)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // 4. Слайдер До/После
+    const slider = document.getElementById('ba-slider');
+    const beforeImg = document.getElementById('before-img');
+    const baLine = document.getElementById('ba-line');
+    slider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      beforeImg.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+      baLine.style.left = `${val}%`;
+    });
+
+    // 5. Бесшовные вкладки (Табы)
+    function openTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+  </script>
 </body>
 </html>
