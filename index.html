@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Denta Clinic | Премиальная стоматология</title>
-  <!-- Подключаем дорогой шрифт -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* --- БАЗОВЫЕ СТИЛИ --- */
+    /* --- БАЗОВЫЕ СТИЛИ (ТЕМНАЯ ТЕМА) --- */
     * {
       margin: 0;
       padding: 0;
@@ -16,20 +15,19 @@
     }
 
     :root {
-      --dark-slate: #1e2327;
+      --bg-main: #121416;
+      --bg-card: #1a1d21;
       --accent-teal: #1a5e5a;
       --accent-hover: #134643;
-      --bg-light: #fbfbfb;
-      --text-main: #2d3134;
-      --text-muted: #888d91;
-      --white: #ffffff;
-      --border-color: #e5e7eb;
+      --text-main: #e2e4e6;
+      --text-muted: #8b9298;
+      --border-color: #2a2e33;
     }
 
     body {
       color: var(--text-main);
       line-height: 1.7;
-      background-color: var(--bg-light);
+      background-color: var(--bg-main);
       -webkit-font-smoothing: antialiased;
     }
 
@@ -46,7 +44,7 @@
       display: inline-block;
       padding: 16px 36px;
       background-color: var(--accent-teal);
-      color: var(--white);
+      color: #ffffff;
       font-size: 14px;
       font-weight: 500;
       letter-spacing: 1px;
@@ -54,27 +52,29 @@
       border: none;
       transition: all 0.4s ease;
       cursor: pointer;
+      text-align: center;
     }
 
     .btn:hover {
       background-color: var(--accent-hover);
-      box-shadow: 0 10px 20px rgba(26, 94, 90, 0.2);
+      box-shadow: 0 10px 20px rgba(26, 94, 90, 0.3);
     }
 
     .btn-outline {
       background-color: transparent;
-      border: 1px solid var(--accent-teal);
-      color: var(--accent-teal);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
     }
 
     .btn-outline:hover {
-      background-color: var(--accent-teal);
-      color: var(--white);
+      border-color: var(--accent-teal);
+      color: var(--accent-teal);
     }
 
     /* --- ШАПКА --- */
     header {
-      background: var(--white);
+      background: rgba(18, 20, 22, 0.95);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border-color);
       position: sticky;
       top: 0;
@@ -93,7 +93,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--dark-slate);
+      color: var(--text-main);
     }
 
     .logo span {
@@ -112,6 +112,7 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       transition: color 0.3s;
+      color: var(--text-muted);
     }
 
     nav a:hover { color: var(--accent-teal); }
@@ -121,16 +122,25 @@
       font-size: 16px;
     }
 
-    /* --- ГЛАВНЫЙ ЭКРАН --- */
+    /* --- ГЛАВНЫЙ ЭКРАН (С АНИМАЦИЕЙ ФОНА) --- */
     .hero {
-      background: var(--dark-slate);
-      color: var(--white);
+      /* Анимированный градиент */
+      background: linear-gradient(-45deg, #0f1215, #1a2226, #102a28, #121416);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
       padding: 120px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 60px;
       align-items: center;
     }
@@ -140,6 +150,7 @@
       font-weight: 300;
       line-height: 1.2;
       margin-bottom: 24px;
+      color: #ffffff;
     }
 
     .hero-text h1 strong {
@@ -149,45 +160,42 @@
 
     .hero-text p {
       font-size: 16px;
-      color: #a0a6ab;
+      color: var(--text-muted);
       margin-bottom: 40px;
       font-weight: 300;
       max-width: 450px;
     }
 
+    /* Информационная карточка вместо формы */
     .hero-card {
-      background: var(--white);
+      background: var(--bg-card);
       padding: 40px;
-      color: var(--text-main);
+      border: 1px solid var(--border-color);
     }
 
     .hero-card h3 {
       font-size: 22px;
       font-weight: 500;
-      margin-bottom: 30px;
-      text-align: center;
+      margin-bottom: 15px;
+      color: #ffffff;
     }
-
-    .form-group { margin-bottom: 20px; }
-
-    .form-group input, .form-group select {
-      width: 100%;
-      padding: 16px;
-      border: 1px solid var(--border-color);
+    
+    .hero-card p {
+      color: var(--text-muted);
       font-size: 14px;
-      background: var(--bg-light);
-      transition: border 0.3s;
-      outline: none;
+      margin-bottom: 30px;
+      line-height: 1.6;
     }
 
-    .form-group input:focus, .form-group select:focus {
-      border-color: var(--accent-teal);
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     /* --- ПРЕИМУЩЕСТВА --- */
     .features {
       padding: 100px 0;
-      background: var(--white);
     }
 
     .features-grid {
@@ -197,7 +205,8 @@
     }
 
     .feature-card {
-      padding: 30px 0;
+      padding: 30px;
+      background: var(--bg-card);
       border-top: 2px solid var(--accent-teal);
     }
 
@@ -205,7 +214,7 @@
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 15px;
-      margin-top: 20px;
+      color: #ffffff;
     }
 
     .feature-card p {
@@ -215,7 +224,12 @@
     }
 
     /* --- УСЛУГИ И ЦЕНЫ --- */
-    .services { padding: 100px 0; }
+    .services { 
+      padding: 100px 0; 
+      background: var(--bg-card);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
 
     .section-title {
       margin-bottom: 60px;
@@ -225,7 +239,7 @@
     .section-title h2 {
       font-size: 36px;
       font-weight: 300;
-      color: var(--dark-slate);
+      color: #ffffff;
     }
 
     .services-list {
@@ -240,11 +254,16 @@
       padding: 24px 0;
       border-bottom: 1px solid var(--border-color);
     }
+    
+    .service-row:last-child {
+      border-bottom: none;
+    }
 
     .service-info h3 {
       font-size: 18px;
       font-weight: 500;
       margin-bottom: 5px;
+      color: var(--text-main);
     }
 
     .service-info p {
@@ -263,11 +282,7 @@
     /* --- КОНТАКТЫ --- */
     .contacts {
       padding: 100px 0;
-      background: var(--dark-slate);
-      color: var(--white);
     }
-
-    .contacts .section-title h2 { color: var(--white); }
 
     .contacts-grid {
       display: grid;
@@ -275,8 +290,6 @@
       gap: 60px;
     }
 
-    .contact-info { margin-top: 20px; }
-    
     .contact-item {
       margin-bottom: 30px;
     }
@@ -289,11 +302,24 @@
       margin-bottom: 5px;
     }
 
-    .contact-item p { font-size: 18px; font-weight: 300; }
+    .contact-item p { 
+      font-size: 18px; 
+      font-weight: 300; 
+      color: #ffffff;
+    }
+
+    .map-box {
+      border: 1px solid var(--border-color); 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      min-height: 300px; 
+      background: var(--bg-card);
+    }
 
     /* --- ПОДВАЛ --- */
     footer {
-      background: #15181a;
+      background: #0a0b0d;
       color: var(--text-muted);
       padding: 40px 0;
       text-align: center;
@@ -333,28 +359,17 @@
       <div class="hero-text">
         <h1>Эстетика и здоровье <strong>в каждой детали</strong></h1>
         <p>Современные протоколы лечения, премиальное оборудование и команда экспертов. Мы создаем улыбки, которыми гордятся.</p>
-        <a href="#appointment" class="btn btn-outline" style="color: var(--white); border-color: var(--white);">Узнать больше</a>
+        <a href="#services" class="btn btn-outline">Посмотреть прайс</a>
       </div>
-      <div class="hero-card" id="appointment">
-        <h3>Запись на консультацию</h3>
-        <form onsubmit="alert('Заявка отправлена. Администратор свяжется с вами в течение 10 минут.'); return false;">
-          <div class="form-group">
-            <input type="text" placeholder="Ваше имя" required>
-          </div>
-          <div class="form-group">
-            <input type="tel" placeholder="Контактный телефон" required>
-          </div>
-          <div class="form-group">
-            <select>
-              <option value="">Направление лечения</option>
-              <option value="consultation">Первичная консультация</option>
-              <option value="therapy">Эстетическая реставрация</option>
-              <option value="cleaning">Профессиональная гигиена</option>
-              <option value="implant">Имплантация</option>
-            </select>
-          </div>
-          <button type="submit" class="btn" style="width: 100%;">Отправить запрос</button>
-        </form>
+      
+      <!-- Информационная карточка -->
+      <div class="hero-card">
+        <h3>Запись на прием</h3>
+        <p>Свяжитесь с администратором клиники для выбора удобного времени консультации.</p>
+        <div class="action-buttons">
+          <a href="tel:+79001234567" class="btn">Позвонить</a>
+          <a href="#" class="btn btn-outline">Написать в WhatsApp</a>
+        </div>
       </div>
     </div>
   </section>
@@ -441,9 +456,8 @@
             <p>Ежедневно с 09:00 до 20:00</p>
           </div>
         </div>
-        <div class="contact-info" style="border: 1px solid #333; display: flex; align-items: center; justify-content: center; min-height: 300px; background: #24292d;">
-          <!-- Место для карты -->
-          <p style="color: #666; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Интерактивная карта</p>
+        <div class="map-box">
+          <p style="color: var(--text-muted); font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Место для Яндекс.Карт</p>
         </div>
       </div>
     </div>
