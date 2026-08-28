@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Denta Clinic | Наши врачи</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Те же базовые стили для сохранения дизайна */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; transition: background 0.3s, color 0.3s; }
+    body { color: #ffffff; line-height: 1.6; background-color: #050b14; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 10; }
+
+    /* Анимация фона */
+    .bg-animation { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; overflow: hidden; background: #050b14; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; transition: transform 0.5s ease-out; }
+    .orb-1 { width: 500px; height: 500px; background: #0f5c53; top: -100px; left: -100px; transform: translate(var(--mx, 0), var(--my, 0)); }
+    .orb-2 { width: 600px; height: 600px; background: #0b3954; bottom: -150px; right: -100px; transform: translate(calc(var(--mx, 0) * -1.5), calc(var(--my, 0) * -1.5)); }
+
+    /* Шапка */
+    header { padding: 20px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: transform 0.4s ease; }
+    header.hidden { transform: translateY(-100%); }
+    .header-content { display: flex; justify-content: space-between; align-items: center; background: rgba(10, 15, 20, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 30px; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); flex-wrap: wrap; gap: 10px; }
+    .logo { font-size: 20px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+    .logo span { color: #2acfc4; }
+    nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+    nav a { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: rgba(255, 255, 255, 0.7); transition: color 0.3s; }
+    nav a:hover, nav a.active { color: #2acfc4; }
+
+    /* Блоки врачей (Стекло) */
+    .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+    
+    .page-title { padding: 150px 0 50px; text-align: center; }
+    .page-title h1 { font-size: 42px; font-weight: 300; }
+    
+    .doctors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding-bottom: 100px; }
+    .doctor-card { text-align: center; transition: transform 0.3s ease; }
+    .doctor-card:hover { transform: translateY(-10px); }
+    
+    /* Заглушка для фото врача */
+    .doctor-photo { width: 100%; height: 350px; background: linear-gradient(135deg, #1a1d21, #188a83); border-radius: 15px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.3); font-weight: bold; border: 1px solid rgba(255,255,255,0.1); }
+    
+    .doctor-card h3 { font-size: 22px; font-weight: 500; margin-bottom: 5px; }
+    .doctor-card p.spec { color: #2acfc4; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
+    .doctor-card p.desc { color: rgba(255,255,255,0.6); font-size: 14px; font-weight: 300; line-height: 1.6; }
+
+    /* Режим для слабовидящих */
+    body.a11y-mode { background: #ffffff !important; color: #000000 !important; }
+    body.a11y-mode * { color: #000000 !important; font-weight: 700 !important; letter-spacing: 1px; }
+    body.a11y-mode .bg-animation { display: none !important; }
+    body.a11y-mode .glass-panel, body.a11y-mode .header-content { background: #ffffff !important; border: 3px solid #000000 !important; backdrop-filter: none !important; box-shadow: none !important; border-radius: 0 !important; }
+    body.a11y-mode .doctor-photo { background: #eeeeee !important; border: 3px solid #000000 !important; border-radius: 0 !important; }
+    
+    @media (max-width: 900px) { .header-content { flex-direction: column; padding: 20px; border-radius: 20px; } nav ul { flex-wrap: wrap; justify-content: center; } }
+  </style>
+</head>
+<body>
+
+  <div class="bg-animation">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <header id="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">Denta<span>Clinic</span></div>
+        <nav>
+          <ul>
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="doctors.html" class="active">Наши врачи</a></li>
+          </ul>
+        </nav>
+        <button id="a11y-toggle" style="background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 600;">👁 Версия для слабовидящих</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-title">
+    <div class="container">
+      <h1>Команда <strong>профессионалов</strong></h1>
+      <p style="color: rgba(255,255,255,0.6); margin-top: 15px; font-weight: 300;">Специалисты с многолетним опытом и международной сертификацией</p>
+    </div>
+  </section>
+
+  <section class="doctors-grid container">
+    
+    <div class="glass-panel doctor-card">
+      <div class="doctor-photo">ФОТО ВРАЧА</div>
+      <h3>Иванов Иван</h3>
+      <p class="spec">Главный врач, Хирург-имплантолог</p>
+      <p class="desc">Опыт работы более 15 лет. Провел более 5000 успешных операций по установке имплантатов. Стажировался в Германии и Израиле.</p>
+    </div>
+
+    <div class="glass-panel doctor-card">
+      <div class="doctor-photo">ФОТО ВРАЧА</div>
+      <h3>Смирнова Анна</h3>
+      <p class="spec">Врач-терапевт, Эндодонтист</p>
+      <p class="desc">Специалист по спасению "безнадежных" зубов и ювелирному лечению каналов под дентальным микроскопом.</p>
+    </div>
+
+    <div class="glass-panel doctor-card">
+      <div class="doctor-photo">ФОТО ВРАЧА</div>
+      <h3>Попов Алексей</h3>
+      <p class="spec">Стоматолог-ортопед</p>
+      <p class="desc">Эксперт по эстетической реставрации, установке керамических виниров и сложным видам протезирования.</p>
+    </div>
+
+  </section>
+
+  <script>
+    // Параллакс фона
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 40;
+      const y = (e.clientY / window.innerHeight - 0.5) * 40;
+      document.documentElement.style.setProperty('--mx', `${x}px`);
+      document.documentElement.style.setProperty('--my', `${y}px`);
+    });
+
+    // Умная шапка
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      const header = document.getElementById('header');
+      if (currentScroll > lastScroll && currentScroll > 100 && !document.body.classList.contains('a11y-mode')) {
+        header.classList.add('hidden');
+      } else {
+        header.classList.remove('hidden');
+      }
+      lastScroll = currentScroll;
+    });
+
+    // Версия для слабовидящих
+    const a11yToggle = document.getElementById('a11y-toggle');
+    a11yToggle.addEventListener('click', () => {
+      document.body.classList.toggle('a11y-mode');
+      a11yToggle.innerText = document.body.classList.contains('a11y-mode') ? '👁 Обычная версия' : '👁 Версия для слабовидящих';
+    });
+  </script>
+</body>
+</html>
