@@ -41,6 +41,17 @@
     .a11y-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
     .a11y-btn:hover { background: rgba(255,255,255,0.1); }
 
+    /* --- АНИМАЦИИ ПОЯВЛЕНИЯ (НАДЕЖНЫЕ) --- */
+    @keyframes fadeUpInit {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-text-anim { animation: fadeUpInit 1s ease-out forwards; }
+    .hero-card-anim { animation: fadeUpInit 1s ease-out 0.3s forwards; opacity: 0; }
+    
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+
     /* --- ГЛАВНЫЙ ЭКРАН --- */
     .hero { padding: 150px 0 100px; min-height: 100vh; display: flex; align-items: center; }
     .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
@@ -111,6 +122,7 @@
     body.a11y-mode h1 strong { -webkit-text-fill-color: #000000 !important; background: none !important; }
     body.a11y-mode .fab { background: #000000 !important; color: #ffffff !important; animation: none !important; border-radius: 0 !important; }
     body.a11y-mode .service-row { border-bottom: 2px solid #000000 !important; }
+    body.a11y-mode .hero-card-anim { opacity: 1 !important; animation: none !important; }
 
     /* --- АДАПТИВНОСТЬ --- */
     @media (max-width: 900px) {
@@ -127,21 +139,18 @@
 </head>
 <body>
 
-  <!-- Анимированный фон -->
   <div class="bg-animation">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- Умная шапка -->
   <header id="header">
     <div class="container">
       <div class="header-content">
         <div class="logo">Denta<span>Clinic</span></div>
         <nav>
           <ul>
-            <!-- Ссылки на страницы -->
             <li><a href="index.html" style="color: #2acfc4;">Главная</a></li>
             <li><a href="doctors.html">Наши врачи</a></li>
             <li><a href="#services">Услуги</a></li>
@@ -153,17 +162,16 @@
     </div>
   </header>
 
-  <!-- Плавающая кнопка -->
   <a href="tel:+79001234567" class="fab">📞</a>
 
   <section class="hero">
     <div class="container hero-grid">
-      <div class="hero-text">
+      <div class="hero-text hero-text-anim">
         <h1>Эстетика и здоровье <br><strong>в каждой детали</strong></h1>
         <p>Индивидуальный подход к вашей улыбке в атмосфере полного спокойствия и комфорта.</p>
         <a href="#services" class="btn btn-outline">Посмотреть прайс</a>
       </div>
-      <div class="glass-panel">
+      <div class="glass-panel hero-card-anim">
         <h3 style="font-size: 24px; font-weight: 500; margin-bottom: 15px;">Запись на прием</h3>
         <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px; font-weight: 300;">Свяжитесь с нами прямо сейчас.</p>
         <div style="display: flex; flex-direction: column; gap: 15px;">
@@ -176,17 +184,17 @@
   <section class="features" id="about">
     <div class="container">
       <div class="features-grid">
-        <div class="glass-panel">
+        <div class="glass-panel reveal">
           <div class="feature-icon">🔍</div>
           <h3>Точная диагностика</h3>
           <p>Безошибочное выявление проблем на самых ранних стадиях.</p>
         </div>
-        <div class="glass-panel">
+        <div class="glass-panel reveal" style="transition-delay: 0.2s;">
           <div class="feature-icon">💎</div>
           <h3>Мировые стандарты</h3>
           <p>Материалы премиум-класса, гарантирующие долговечность.</p>
         </div>
-        <div class="glass-panel">
+        <div class="glass-panel reveal" style="transition-delay: 0.4s;">
           <div class="feature-icon">🛡️</div>
           <h3>Абсолютный комфорт</h3>
           <p>Лечение без стресса с применением безопасной анестезии.</p>
@@ -195,9 +203,8 @@
     </div>
   </section>
 
-  <!-- Интерактивный блок До/После -->
   <section class="portfolio" id="portfolio">
-    <div class="container">
+    <div class="container reveal">
       <div class="section-title">
         <h2>Реставрация улыбки</h2>
         <p style="color: rgba(255,255,255,0.6); margin-top: 10px;">Потяните ползунок, чтобы увидеть результат</p>
@@ -213,9 +220,8 @@
     </div>
   </section>
 
-  <!-- Вкладки с прайс-листом -->
   <section class="services" id="services">
-    <div class="container">
+    <div class="container reveal">
       <div class="glass-panel">
         <div class="section-title" style="margin-bottom: 30px;">
           <h2>Наши услуги</h2>
@@ -265,7 +271,7 @@
   </section>
 
   <section class="contacts" id="contacts">
-    <div class="container">
+    <div class="container reveal">
       <div class="section-title">
         <h2>Ждем вас на приеме</h2>
       </div>
@@ -288,7 +294,6 @@
     </div>
   </footer>
 
-  <!-- СКРИПТЫ -->
   <script>
     // 1. Живой фон
     document.addEventListener('mousemove', (e) => {
@@ -342,6 +347,20 @@
       document.getElementById(tabName).classList.add('active');
       event.currentTarget.classList.add('active');
     }
+
+    // 6. Анимация появления при прокрутке (Scroll Reveal)
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    // Запускаем наблюдатель только если не включен режим слабовидящих
+    document.querySelectorAll('.reveal').forEach((el) => {
+        observer.observe(el);
+    });
   </script>
 </body>
 </html>
