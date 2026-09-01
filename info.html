@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Правовая информация | Ваш стоматолог</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* --- БАЗОВЫЕ СТИЛИ --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; transition: background 0.3s, color 0.3s; }
+    body { color: #ffffff; line-height: 1.6; background-color: #050b14; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    @media (min-width: 992px) { body, a, button, input, select { cursor: none !important; } }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 10; }
+
+    /* --- КАСТОМНЫЙ КУРСОР --- */
+    .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+    .cursor-dot { width: 8px; height: 8px; background: #2acfc4; transition: opacity 0.3s; }
+    .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(42, 207, 196, 0.5); transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s; }
+    .cursor-hover .cursor-outline { width: 60px; height: 60px; background: rgba(42, 207, 196, 0.1); border-color: #2acfc4; }
+
+    /* --- АНИМИРОВАННЫЙ ФОН --- */
+    .bg-animation { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; overflow: hidden; background: #050b14; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; transition: transform 0.1s linear; }
+    .orb-1 { width: 500px; height: 500px; background: #0f5c53; top: -100px; left: -100px; transform: translate(var(--mx, 0), var(--my, 0)); }
+    .orb-2 { width: 600px; height: 600px; background: #0b3954; bottom: -150px; right: -100px; transform: translate(calc(var(--mx, 0) * -1.5), calc(var(--my, 0) * -1.5)); }
+
+    /* --- СТЕКЛО И БЛОКИ ИНФОРМАЦИИ --- */
+    .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); margin-bottom: 30px; }
+    .info-section h2 { font-size: 24px; font-weight: 500; color: #2acfc4; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+    .info-section h3 { font-size: 18px; font-weight: 500; margin-top: 20px; margin-bottom: 10px; }
+    .info-section p, .info-section ul { font-size: 15px; color: rgba(255,255,255,0.8); margin-bottom: 15px; font-weight: 300; }
+    .info-section ul { padding-left: 20px; }
+    .info-section li { margin-bottom: 8px; }
+
+    /* --- ШАПКА --- */
+    header { padding: 20px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: transform 0.4s ease; }
+    header.hidden { transform: translateY(-100%); }
+    .header-content { display: flex; justify-content: space-between; align-items: center; background: rgba(10, 15, 20, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 30px; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); flex-wrap: wrap; gap: 10px; }
+    .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .logo span { color: #2acfc4; }
+    nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+    nav a { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: rgba(255, 255, 255, 0.7); transition: color 0.3s; }
+    nav a:hover { color: #ffffff; }
+    .header-phone { font-weight: 600; font-size: 15px; letter-spacing: 1px; }
+    .a11y-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+    .a11y-btn:hover { background: rgba(255,255,255,0.1); }
+
+    /* --- ЗАГОЛОВОК СТРАНИЦЫ --- */
+    .page-title { padding: 150px 0 50px; text-align: center; }
+    .page-title h1 { font-size: 42px; font-weight: 300; }
+
+    footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); z-index: 10; position: relative; line-height: 1.8;}
+
+    /* ========================================= */
+    /* РЕЖИМ ДЛЯ СЛАБОВИДЯЩИХ (ВЫСОКИЙ КОНТРАСТ) */
+    /* ========================================= */
+    body.a11y-mode { background: #ffffff !important; color: #000000 !important; cursor: auto !important; }
+    body.a11y-mode * { color: #000000 !important; font-weight: 700 !important; letter-spacing: 1px; cursor: auto !important; }
+    body.a11y-mode .bg-animation, body.a11y-mode .cursor-dot, body.a11y-mode .cursor-outline { display: none !important; }
+    body.a11y-mode .glass-panel { background: #ffffff !important; border: 3px solid #000000 !important; backdrop-filter: none !important; box-shadow: none !important; }
+    body.a11y-mode .header-content { background: #ffffff !important; border: 3px solid #000000 !important; border-radius: 0 !important; }
+    body.a11y-mode header.hidden { transform: none !important; }
+    body.a11y-mode .a11y-btn { background: #000000 !important; color: #ffffff !important; border: 2px solid #000000 !important; }
+    body.a11y-mode .info-section h2 { border-bottom: 2px solid #000 !important; }
+
+    @media (max-width: 900px) { .header-content { flex-direction: column; padding: 20px; gap: 15px; border-radius: 20px; } nav ul { flex-wrap: wrap; justify-content: center; } .cursor-dot, .cursor-outline { display: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- Кастомный курсор -->
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-outline" id="cursor-outline"></div>
+
+  <!-- Фон -->
+  <div class="bg-animation">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <header id="header">
+    <div class="container" style="max-width: 1200px;">
+      <div class="header-content">
+        <div class="logo">Ваш<span>Стоматолог</span></div>
+        <nav>
+          <ul>
+            <li><a href="index.html" class="hover-target">Главная</a></li>
+            <li><a href="info.html" class="hover-target" style="color: #2acfc4;">Правовая информация</a></li>
+          </ul>
+        </nav>
+        <button id="a11y-toggle" class="a11y-btn hover-target">👁 Версия для слабовидящих</button>
+        <div class="header-phone">+7 (914) 587-88-20</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-title">
+    <div class="container">
+      <h1>Правовая информация и правила</h1>
+    </div>
+  </section>
+
+  <section class="info-content">
+    <div class="container">
+      
+      <div class="glass-panel info-section">
+        <h2>Реквизиты и Лицензии</h2>
+        <p><strong>Индивидуальный предприниматель:</strong> Вартанян Артур Аршакович</p>
+        <p><strong>ОГРНИП:</strong> 313280706400037</p>
+        <p><strong>ИНН:</strong> 280721805368</p>
+        <p><strong>Медицинская лицензия:</strong> Л041-01123-28/00289180 от 06.09.2013, выдана Федеральной службой по надзору в сфере здравоохранения.</p>
+        <p><strong>Диплом:</strong> ВСБ 0623064 «Стоматология» (выдан 23.06.2005 г.)</p>
+      </div>
+
+      <div class="glass-panel info-section">
+        <h2>Правила внутреннего распорядка и приема пациентов</h2>
+        <p>Стоматологический кабинет является частной структурой и оказывает платные медицинские услуги. Прием пациентов на плановые консультации и лечение ведется по предварительной записи по телефону <strong>+7 (914) 587-88-20</strong>.</p>
+        <ul>
+          <li>Пациент обязан явиться на прием за 10 минут до назначенного времени.</li>
+          <li>В случае опоздания или неявки желательно предупредить об этом не менее чем за 24 часа.</li>
+          <li>В кабинете необходимо соблюдать правила поведения в общественных местах, санитарно-противоэпидемический режим (надевать бахилы) и правила пожарной безопасности.</li>
+        </ul>
+        <h3>Оформление документов</h3>
+        <p>При первичном осмотре данные заносятся в медицинскую карту пациента. Она является собственностью стоматологического кабинета, хранится в кабинете в течение 5 лет и на руки не выдается. Выдача копий или выписок производится по письменному запросу.</p>
+      </div>
+
+      <div class="glass-panel info-section">
+        <h2>Оплата и гарантии</h2>
+        <p>Оплата проводится в день оказания услуги наличными в кассу или банковскими картами. С согласия пациента услуги могут быть оплачены в полном объеме предоплатой или частично путем внесения аванса.</p>
+        <p>Информация о гарантийном сроке лечения прописывается в договоре. <strong>По всем гарантийным случаям работы выполняются бесплатно.</strong></p>
+        <p>Справка для налоговой инспекции по возврату подоходного налога за медицинские услуги выдается в течение 30 дней после обращения при наличии подтверждающих чеков.</p>
+      </div>
+
+      <div class="glass-panel info-section">
+        <h2>Программа государственных гарантий (Бесплатная помощь)</h2>
+        <p>Для получения бесплатной стоматологической помощи в рамках Программы Государственных гарантий (ОМС) граждане могут обратиться в стоматологическое отделение ГБУЗ "Свободненская городская поликлиника".</p>
+        <p><strong>Адрес:</strong> Амурская область, г. Свободный, ул. Мухина, дом 47.</p>
+        <p><strong>Телефон:</strong> 8 (41643) 5-43-50.</p>
+      </div>
+
+      <div class="glass-panel info-section">
+        <h2>Контролирующие и надзорные органы</h2>
+        <h3>Управление Росздравнадзора по Амурской области</h3>
+        <p>г. Благовещенск, ул. Мухина, 31<br>
+        Телефон: 8 (4162) 53-21-01 (Руководитель Даниленко Г.А.)<br>
+        Отдел контроля: 8 (4162) 51-66-07</p>
+
+        <h3>Территориальный отдел Управления Роспотребнадзора (в г. Свободный)</h3>
+        <p>г. Свободный, ул. Шатковская, 116<br>
+        Телефон приемной: 8 (41643) 3-37-36 (Руководитель Солохина В.А.)<br>
+        Начальник отдела: 8 (41643) 3-36-18 (Жуков А.П.)</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Стоматологический кабинет «Ваш стоматолог».</p>
+      <p>ИП Вартанян Артур Аршакович (ОГРНИП 313280706400037, ИНН 280721805368).</p>
+      <p>Лицензия Л041-01123-28/00289180 от 06.09.2013 г.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Кастомный курсор
+    if (window.innerWidth > 992) {
+      const cursorDot = document.getElementById('cursor-dot');
+      const cursorOutline = document.getElementById('cursor-outline');
+      
+      window.addEventListener('mousemove', function(e) {
+        cursorDot.style.left = `${e.clientX}px`;
+        cursorDot.style.top = `${e.clientY}px`;
+        setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50);
+
+        const x = (e.clientX / window.innerWidth - 0.5) * 40;
+        const y = (e.clientY / window.innerHeight - 0.5) * 40;
+        document.documentElement.style.setProperty('--mx', `${x}px`);
+        document.documentElement.style.setProperty('--my', `${y}px`);
+      });
+
+      document.querySelectorAll('.hover-target, a').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      });
+    }
+
+    // Умная шапка
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      const header = document.getElementById('header');
+      if (currentScroll > lastScroll && currentScroll > 100 && !document.body.classList.contains('a11y-mode')) {
+        header.classList.add('hidden');
+      } else {
+        header.classList.remove('hidden');
+      }
+      lastScroll = currentScroll;
+    });
+
+    // Слабовидящие
+    document.getElementById('a11y-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('a11y-mode');
+      const btn = document.getElementById('a11y-toggle');
+      if (document.body.classList.contains('a11y-mode')) {
+        btn.innerText = '👁 Обычная версия';
+        document.getElementById('header').classList.remove('hidden');
+      } else {
+        btn.innerText = '👁 Версия для слабовидящих';
+      }
+    });
+  </script>
+</body>
+</html>
