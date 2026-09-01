@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Denta Clinic | Premium</title>
+  <title>Ваш стоматолог | Протезирование зубов в Свободном</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     /* --- БАЗОВЫЕ СТИЛИ --- */
@@ -46,7 +46,7 @@
     header { padding: 20px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: transform 0.4s ease; }
     header.hidden { transform: translateY(-100%); }
     .header-content { display: flex; justify-content: space-between; align-items: center; background: rgba(10, 15, 20, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 30px; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); flex-wrap: wrap; gap: 10px; }
-    .logo { font-size: 20px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+    .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
     .logo span { color: #2acfc4; }
     nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
     nav a { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: rgba(255, 255, 255, 0.7); transition: color 0.3s; }
@@ -78,7 +78,7 @@
     /* --- ГЛАВНЫЙ ЭКРАН --- */
     .hero { padding: 150px 0 60px; min-height: 100vh; display: flex; align-items: center; }
     .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
-    .hero-text h1 { font-size: 52px; font-weight: 300; line-height: 1.15; margin-bottom: 30px; }
+    .hero-text h1 { font-size: 48px; font-weight: 300; line-height: 1.15; margin-bottom: 30px; }
     .hero-text h1 strong { font-weight: 700; background: linear-gradient(to right, #ffffff, #2acfc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-text p { font-size: 17px; color: rgba(255, 255, 255, 0.7); margin-bottom: 40px; font-weight: 300; max-width: 480px; }
 
@@ -132,7 +132,7 @@
     .contact-item { margin-bottom: 30px; }
     .contact-item h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.5); margin-bottom: 5px; }
 
-    footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); z-index: 10; position: relative; }
+    footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); z-index: 10; position: relative; line-height: 1.8;}
 
     /* ========================================= */
     /* РЕЖИМ ДЛЯ СЛАБОВИДЯЩИХ (ВЫСОКИЙ КОНТРАСТ) */
@@ -157,13 +157,16 @@
 </head>
 <body>
 
+  <!-- Прелоадер -->
   <div id="preloader">
-    <div class="preloader-content">Denta<span>Clinic</span></div>
+    <div class="preloader-content">Ваш<span>Стоматолог</span></div>
   </div>
 
+  <!-- Кастомный курсор -->
   <div class="cursor-dot" id="cursor-dot"></div>
   <div class="cursor-outline" id="cursor-outline"></div>
 
+  <!-- Фон -->
   <div class="bg-animation">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -173,23 +176,25 @@
   <header id="header">
     <div class="container">
       <div class="header-content">
-        <div class="logo">Denta<span>Clinic</span></div>
+        <div class="logo">Ваш<span>Стоматолог</span></div>
         <nav>
           <ul>
             <li><a href="index.html" class="hover-target" style="color: #2acfc4;">Главная</a></li>
-            <li><a href="doctors.html" class="hover-target">Наши врачи</a></li>
-            <li><a href="#services" class="hover-target">Услуги</a></li>
+            <li><a href="#about" class="hover-target">О клинике</a></li>
+            <li><a href="#services" class="hover-target">Прайс</a></li>
             <li><a href="#faq" class="hover-target">Вопросы</a></li>
           </ul>
         </nav>
         <button id="a11y-toggle" class="a11y-btn hover-target">👁 Версия для слабовидящих</button>
-        <div class="header-phone">+7 (900) 123-45-67</div>
+        <div class="header-phone">+7 (914) 587-88-20</div>
       </div>
     </div>
   </header>
 
-  <a href="tel:+79001234567" class="fab hover-target">📞</a>
+  <!-- Плавающая кнопка (FAB) -->
+  <a href="tel:+79145878820" class="fab hover-target">📞</a>
 
+  <!-- Модальное окно -->
   <div class="popup-overlay" id="popupOverlay" onclick="closePopup(event)">
     <div class="popup-content glass-panel" onclick="event.stopPropagation()">
       <span class="popup-close hover-target" onclick="closePopup(event, true)">×</span>
@@ -199,12 +204,12 @@
         <input type="tel" placeholder="Телефон" required class="hover-target">
         <select class="hover-target">
           <option value="">Интересующая услуга</option>
-          <option value="consult">Консультация</option>
-          <option value="hygiene">Чистка зубов</option>
-          <option value="pain">Острая боль</option>
+          <option value="consult">Первичная консультация</option>
+          <option value="crown">Установка коронки</option>
+          <option value="prosthesis">Съемное протезирование</option>
         </select>
         <div class="btn-magnetic-wrap hover-target" style="width: 100%; margin-top: 10px;">
-          <button type="submit" class="btn magnetic-btn" style="width: 100%;">Записаться</button>
+          <button type="submit" class="btn magnetic-btn" style="width: 100%;">Записаться на прием</button>
         </div>
       </form>
     </div>
@@ -213,55 +218,54 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-text reveal">
-        <h1>Эстетика и здоровье <br><strong>в каждой детали</strong></h1>
-        <p>Индивидуальный подход к вашей улыбке в атмосфере полного спокойствия и комфорта.</p>
+        <h1>Профессиональное протезирование зубов <br><strong>в г. Свободный</strong></h1>
+        <p>Кабинет врача-стоматолога-ортопеда Вартаняна Артура Аршаковича. Возвращаем уверенность и комфорт вашей улыбке с 2013 года.</p>
         <div class="btn-magnetic-wrap hover-target">
-          <button class="btn magnetic-btn" onclick="openPopup()">Записаться онлайн</button>
+          <button class="btn magnetic-btn" onclick="openPopup()">Записаться на прием</button>
         </div>
       </div>
       <div class="glass-panel reveal" style="transition-delay: 0.2s;">
-        <h3 style="font-size: 24px; font-weight: 500; margin-bottom: 15px;">Связь с клиникой</h3>
-        <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px; font-weight: 300;">Выберите удобный способ связи с нами.</p>
+        <h3 style="font-size: 24px; font-weight: 500; margin-bottom: 15px;">Связь с врачом</h3>
+        <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px; font-weight: 300;">Выберите удобный способ связи для плановой консультации.</p>
         <div style="display: flex; flex-direction: column; gap: 0;">
           <div class="btn-magnetic-wrap hover-target">
             <button class="btn magnetic-btn" onclick="openPopup()" style="width: 100%;">Оставить заявку</button>
           </div>
           <div class="btn-magnetic-wrap hover-target">
-            <a href="tel:+79001234567" class="btn btn-outline magnetic-btn" style="width: 100%; display: block;">Позвонить: +7(900)123-4567</a>
+            <a href="tel:+79145878820" class="btn btn-outline magnetic-btn" style="width: 100%; display: block;">Позвонить: +7(914)587-88-20</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Бегущая строка -->
   <div class="marquee-container reveal">
     <div class="marquee-content">
-      <span>• Премиальная стоматология •</span>
-      <span>• Точная 3D диагностика •</span>
-      <span>• Лечение без боли и стресса •</span>
-      <span>• Рассрочка на имплантацию •</span>
-      <span>• Гарантия на все виды работ •</span>
-      <span>• Премиальная стоматология •</span>
-      <span>• Точная 3D диагностика •</span>
-      <span>• Лечение без боли и стресса •</span>
-      <span>• Рассрочка на имплантацию •</span>
-      <span>• Гарантия на все виды работ •</span>
+      <span>• Коронки и протезы любой сложности •</span>
+      <span>• Опыт работы с 2005 года •</span>
+      <span>• Безопасно и безболезненно •</span>
+      <span>• Бесплатная консультация перед лечением •</span>
+      <span>• Коронки и протезы любой сложности •</span>
+      <span>• Опыт работы с 2005 года •</span>
+      <span>• Безопасно и безболезненно •</span>
+      <span>• Бесплатная консультация перед лечением •</span>
     </div>
   </div>
 
   <section class="features" id="about">
     <div class="container">
       <div class="features-grid">
-        <div class="glass-panel reveal"><div class="feature-icon">🔍</div><h3>Точная диагностика</h3><p>Безошибочное выявление проблем на ранних стадиях.</p></div>
-        <div class="glass-panel reveal" style="transition-delay: 0.2s;"><div class="feature-icon">💎</div><h3>Мировые стандарты</h3><p>Материалы премиум-класса, гарантирующие долговечность.</p></div>
-        <div class="glass-panel reveal" style="transition-delay: 0.4s;"><div class="feature-icon">🛡️</div><h3>Абсолютный комфорт</h3><p>Лечение без стресса с применением безопасной анестезии.</p></div>
+        <div class="glass-panel reveal"><div class="feature-icon">👨‍⚕️</div><h3>Опыт с 2005 года</h3><p>Прием ведет врач-стоматолог-ортопед Вартанян Артур Аршакович.</p></div>
+        <div class="glass-panel reveal" style="transition-delay: 0.2s;"><div class="feature-icon">💎</div><h3>Современный подход</h3><p>Используем только качественные материалы и уникальные технологии.</p></div>
+        <div class="glass-panel reveal" style="transition-delay: 0.4s;"><div class="feature-icon">🛡️</div><h3>Лечение без страха</h3><p>Уютная обстановка и безопасная анестезия помогут преодолеть боязнь кресла.</p></div>
       </div>
     </div>
   </section>
 
   <section class="portfolio" id="portfolio">
     <div class="container reveal">
-      <div class="section-title"><h2>Реставрация улыбки</h2></div>
+      <div class="section-title"><h2>Результаты протезирования</h2></div>
       <div class="ba-container">
         <div class="ba-img ba-after">ПОСЛЕ</div>
         <div class="ba-img ba-before" id="before-img">ДО</div>
@@ -271,34 +275,44 @@
     </div>
   </section>
 
+  <!-- Вкладки с прайсом (обновлено по Прейскуранту) -->
   <section class="services" id="services">
     <div class="container reveal">
       <div class="glass-panel">
-        <div class="section-title" style="margin-bottom: 30px;"><h2>Наши услуги</h2></div>
+        <div class="section-title" style="margin-bottom: 30px;"><h2>Прейскурант на ортопедическую помощь</h2></div>
         <div class="tabs-header">
-          <button class="tab-btn active hover-target" onclick="openTab('therapy')">Терапия</button>
-          <button class="tab-btn hover-target" onclick="openTab('hygiene')">Гигиена</button>
-          <button class="tab-btn hover-target" onclick="openTab('surgery')">Хирургия</button>
+          <button class="tab-btn active hover-target" onclick="openTab('crowns')">Несъемные протезы</button>
+          <button class="tab-btn hover-target" onclick="openTab('removable')">Съемные протезы</button>
+          <button class="tab-btn hover-target" onclick="openTab('clasp')">Бюгельные протезы</button>
         </div>
 
-        <div id="therapy" class="tab-content active">
-          <div class="service-row"><div class="service-info"><h3>Лечение кариеса</h3><p>Светоотверждаемая пломба и полировка</p></div><div class="service-price">от 3 500 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Эстетическая реставрация</h3><p>Восстановление формы зуба</p></div><div class="service-price">от 5 000 ₽</div></div>
+        <div id="crowns" class="tab-content active">
+          <div class="service-row"><div class="service-info"><h3>Коронка штампованная</h3><p>Восстановление зуба</p></div><div class="service-price">5 000 ₽</div></div>
+          <div class="service-row"><div class="service-info"><h3>Коронка цельнолитая</h3><p>С напылением или без</p></div><div class="service-price">от 6 000 ₽</div></div>
+          <div class="service-row"><div class="service-info"><h3>Коронка металлокерамическая</h3><p>Восстановление зуба (1 ед.)</p></div><div class="service-price">9 500 ₽</div></div>
+          <div class="service-row"><div class="service-info"><h3>Коронка циркониевая</h3><p>С керамической облицовкой</p></div><div class="service-price">16 000 ₽</div></div>
         </div>
 
-        <div id="hygiene" class="tab-content">
-          <div class="service-row"><div class="service-info"><h3>Комплексная чистка (AirFlow)</h3><p>Удаление налета и камня</p></div><div class="service-price">4 500 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Отбеливание ZOOM 4</h3><p>Безопасное осветление на 8 тонов</p></div><div class="service-price">25 000 ₽</div></div>
+        <div id="removable" class="tab-content">
+          <div class="service-row"><div class="service-info"><h3>Полный съемный протез</h3><p>Акриловый</p></div><div class="service-price">14 000 ₽</div></div>
+          <div class="service-row"><div class="service-info"><h3>Частичный/Полный протез</h3><p>Нейлоновый или Acry-free</p></div><div class="service-price">36 000 ₽</div></div>
+          <div class="service-row"><div class="service-info"><h3>Съемный протез</h3><p>С металлическим каркасом</p></div><div class="service-price">40 000 ₽</div></div>
         </div>
 
-        <div id="surgery" class="tab-content">
-          <div class="service-row"><div class="service-info"><h3>Простое удаление зуба</h3><p>Безболезненное удаление</p></div><div class="service-price">от 2 000 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Удаление зуба мудрости</h3><p>Сложное атипичное удаление</p></div><div class="service-price">от 4 500 ₽</div></div>
+        <div id="clasp" class="tab-content">
+          <div class="service-row"><div class="service-info"><h3>Бюгельный протез</h3><p>На кламмерах</p></div><div class="service-price">45 000 ₽</div></div>
+          <div class="service-row"><div class="service-info"><h3>Бюгельный протез</h3><p>На аттачменах</p></div><div class="service-price">70 000 ₽</div></div>
+          <div class="service-row"><div class="service-info"><h3>Бюгельный протез</h3><p>С нейлоновым базисом</p></div><div class="service-price">36 000 ₽</div></div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.5);">
+          * Консультация врача-стоматолога-ортопеда: 500 ₽. Окончательная стоимость определяется после составления плана лечения.
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Блок FAQ -->
   <section class="faq" id="faq">
     <div class="container reveal">
       <div class="section-title">
@@ -307,16 +321,16 @@
       </div>
       <div class="faq-list">
         <div class="faq-item glass-panel hover-target" onclick="toggleFaq(this)">
-          <div class="faq-question"><span>Больно ли ставить имплант?</span><span class="faq-icon">+</span></div>
-          <div class="faq-answer">Абсолютно нет. Установка импланта проходит под качественной местной анестезией. Сам процесс ощущается даже легче, чем удаление зуба.</div>
+          <div class="faq-question"><span>Даете ли вы гарантию на работу?</span><span class="faq-icon">+</span></div>
+          <div class="faq-answer">Да, по всем гарантийным случаям работы выполняются абсолютно бесплатно. Срок гарантии прописывается в договоре.</div>
         </div>
         <div class="faq-item glass-panel hover-target" onclick="toggleFaq(this)">
-          <div class="faq-question"><span>Как часто нужно делать чистку зубов?</span><span class="faq-icon">+</span></div>
-          <div class="faq-answer">Стоматологи рекомендуют проходить профессиональную гигиену каждые 6 месяцев. Для тех, кто курит или пьет много кофе — раз в 3-4 месяца.</div>
+          <div class="faq-question"><span>Нужно ли приносить снимки на первичный прием?</span><span class="faq-icon">+</span></div>
+          <div class="faq-answer">Первичная консультация проводится без обязательного наличия рентгеновских снимков, однако если они у вас есть — возьмите их с собой для более точной постановки диагноза.</div>
         </div>
         <div class="faq-item glass-panel hover-target" onclick="toggleFaq(this)">
-          <div class="faq-question"><span>Можно ли оплатить лечение в рассрочку?</span><span class="faq-icon">+</span></div>
-          <div class="faq-answer">Да, мы предоставляем беспроцентную внутреннюю рассрочку на дорогостоящие планы лечения (брекеты, имплантация, виниры).</div>
+          <div class="faq-question"><span>Как происходит оплата?</span><span class="faq-icon">+</span></div>
+          <div class="faq-answer">Оплата проводится в день оказания услуги наличными в кассу или банковской картой. С согласия пациента услуги могут быть оплачены полностью авансом. Справка для налоговой (возврат подоходного налога) выдается по запросу.</div>
         </div>
       </div>
     </div>
@@ -327,19 +341,25 @@
       <div class="section-title"><h2>Ждем вас на приеме</h2></div>
       <div class="contacts-grid">
         <div class="glass-panel">
-          <div class="contact-item"><h4>Адрес</h4><p>г. Свободный, ул. Ленина, д. 10</p></div>
-          <div class="contact-item"><h4>Телефон</h4><p>+7 (900) 123-45-67</p></div>
-          <div class="contact-item"><h4>Режим работы</h4><p>Ежедневно с 09:00 до 20:00</p></div>
+          <div class="contact-item"><h4>Адрес</h4><p>г. Свободный, ул. 50 лет Октября, д. 33, каб. 206<br><span style="font-size:14px; color:rgba(255,255,255,0.6);">(общежитие ДОСААФ, 2 этаж, вход со двора)</span></p></div>
+          <div class="contact-item"><h4>Телефон</h4><p>+7 (914) 587-88-20</p></div>
+          <div class="contact-item"><h4>E-mail</h4><p>arik92ladra@yandex.ru</p></div>
+          <div class="contact-item"><h4>Режим работы</h4><p>Пн-Пт: 13:00 – 20:00<br>Сб-Вс: Выходной</p></div>
         </div>
         <div class="glass-panel" style="display:flex; align-items:center; justify-content:center;">
-          <p style="color:rgba(255,255,255,0.4); font-size:14px;">Здесь будет карта</p>
+          <p style="color:rgba(255,255,255,0.4); font-size:14px;">Здесь будет виджет Яндекс Карт</p>
         </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="container"><p>&copy; 2026 Denta Clinic. Лицензия ЛО-XX-XX-XXXXXX. Имеются противопоказания, необходима консультация специалиста.</p></div>
+    <div class="container">
+      <p>&copy; 2026 Стоматологический кабинет «Ваш стоматолог».</p>
+      <p>ИП Вартанян Артур Аршакович (ОГРНИП 313280706400037, ИНН 280721805368).</p>
+      <p>Лицензия на осуществление медицинской деятельности Л041-01123-28/00289180 от 06.09.2013 г.</p>
+      <p style="margin-top: 15px;"><a href="info.html" style="text-decoration: underline; color: rgba(255,255,255,0.7);">Правовая информация и правила приема пациентов</a></p>
+    </div>
   </footer>
 
   <script>
@@ -347,12 +367,11 @@
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('preloader').classList.add('loaded');
-        // Запускаем IntersectionObserver только после прелоадера
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-      }, 1000); // 1 секунда экрана загрузки
+      }, 1000); 
     });
 
     // 2. КАСТОМНЫЙ КУРСОР И МАГНИТНЫЕ КНОПКИ
@@ -365,7 +384,6 @@
         cursorDot.style.top = `${e.clientY}px`;
         setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50);
 
-        // Параллакс фона
         const x = (e.clientX / window.innerWidth - 0.5) * 40;
         const y = (e.clientY / window.innerHeight - 0.5) * 40;
         document.documentElement.style.setProperty('--mx', `${x}px`);
@@ -377,11 +395,10 @@
         el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
       });
 
-      // Магнитные кнопки
       document.querySelectorAll('.btn-magnetic-wrap').forEach(wrap => {
         const btn = wrap.querySelector('.magnetic-btn');
         wrap.addEventListener('mousemove', (e) => {
-          if(document.body.classList.contains('a11y-mode')) return; // отключаем в режиме для слабовидящих
+          if(document.body.classList.contains('a11y-mode')) return; 
           const rect = wrap.getBoundingClientRect();
           const h = rect.width / 2; const w = rect.height / 2;
           const x = e.clientX - rect.left - h; const y = e.clientY - rect.top - w;
