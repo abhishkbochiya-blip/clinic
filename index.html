@@ -80,7 +80,8 @@
     .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
     .hero-text h1 { font-size: 48px; font-weight: 300; line-height: 1.15; margin-bottom: 30px; }
     .hero-text h1 strong { font-weight: 700; background: linear-gradient(to right, #ffffff, #2acfc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero-text p { font-size: 17px; color: rgba(255, 255, 255, 0.7); margin-bottom: 40px; font-weight: 300; max-width: 480px; }
+    .hero-text p { font-size: 17px; color: rgba(255, 255, 255, 0.7); margin-bottom: 30px; font-weight: 300; max-width: 480px; }
+    .special-offer { background: rgba(42, 207, 196, 0.1); border-left: 4px solid #2acfc4; padding: 15px 20px; border-radius: 0 10px 10px 0; margin-bottom: 40px; display: inline-block; }
 
     /* --- БЕГУЩАЯ СТРОКА --- */
     .marquee-container { width: 100%; overflow: hidden; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 0; position: relative; z-index: 10; display: flex; white-space: nowrap; margin-top: 60px; }
@@ -131,6 +132,9 @@
     .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
     .contact-item { margin-bottom: 30px; }
     .contact-item h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.5); margin-bottom: 5px; }
+    
+    /* Стили для Яндекс Карты */
+    .map-container { width: 100%; height: 100%; min-height: 350px; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
 
     footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); z-index: 10; position: relative; line-height: 1.8;}
 
@@ -151,6 +155,7 @@
     body.a11y-mode .fab { background: #000000 !important; color: #ffffff !important; animation: none !important; border-radius: 0 !important; }
     body.a11y-mode .popup-overlay { background: rgba(0,0,0,0.9); }
     body.a11y-mode .popup-form input, body.a11y-mode .popup-form select { background: #fff; border: 2px solid #000 !important; border-radius: 0; color: #000 !important; }
+    body.a11y-mode .special-offer { border-color: #000; background: transparent; }
 
     @media (max-width: 900px) { .hero-grid, .contacts-grid { grid-template-columns: 1fr; } .header-content { flex-direction: column; padding: 20px; gap: 15px; border-radius: 20px; } nav ul { flex-wrap: wrap; justify-content: center; } .cursor-dot, .cursor-outline { display: none; } }
   </style>
@@ -207,6 +212,7 @@
           <option value="consult">Первичная консультация</option>
           <option value="crown">Установка коронки</option>
           <option value="prosthesis">Съемное протезирование</option>
+          <option value="home">Вызов врача на дом</option>
         </select>
         <div class="btn-magnetic-wrap hover-target" style="width: 100%; margin-top: 10px;">
           <button type="submit" class="btn magnetic-btn" style="width: 100%;">Записаться на прием</button>
@@ -220,6 +226,14 @@
       <div class="hero-text reveal">
         <h1>Профессиональное протезирование зубов <br><strong>в г. Свободный</strong></h1>
         <p>Кабинет врача-стоматолога-ортопеда Вартаняна Артура Аршаковича. Возвращаем уверенность и комфорт вашей улыбке с 2013 года.</p>
+        
+        <!-- Добавлено УТП про выезд на дом -->
+        <div class="special-offer">
+          <strong>🚗 Доступен вызов врача на дом</strong><br>
+          <span style="font-size: 14px; font-weight: 300;">Удобное решение для маломобильных пациентов (2000 ₽)</span>
+        </div>
+
+        <br>
         <div class="btn-magnetic-wrap hover-target">
           <button class="btn magnetic-btn" onclick="openPopup()">Записаться на прием</button>
         </div>
@@ -245,11 +259,11 @@
       <span>• Коронки и протезы любой сложности •</span>
       <span>• Опыт работы с 2005 года •</span>
       <span>• Безопасно и безболезненно •</span>
-      <span>• Бесплатная консультация перед лечением •</span>
+      <span>• Вызов врача на дом •</span>
       <span>• Коронки и протезы любой сложности •</span>
       <span>• Опыт работы с 2005 года •</span>
       <span>• Безопасно и безболезненно •</span>
-      <span>• Бесплатная консультация перед лечением •</span>
+      <span>• Вызов врача на дом •</span>
     </div>
   </div>
 
@@ -275,7 +289,7 @@
     </div>
   </section>
 
-  <!-- Вкладки с прайсом (обновлено по Прейскуранту) -->
+  <!-- Вкладки с прайсом -->
   <section class="services" id="services">
     <div class="container reveal">
       <div class="glass-panel">
@@ -284,6 +298,8 @@
           <button class="tab-btn active hover-target" onclick="openTab('crowns')">Несъемные протезы</button>
           <button class="tab-btn hover-target" onclick="openTab('removable')">Съемные протезы</button>
           <button class="tab-btn hover-target" onclick="openTab('clasp')">Бюгельные протезы</button>
+          <!-- Добавлена вкладка Ремонт протезов -->
+          <button class="tab-btn hover-target" onclick="openTab('repair')">Ремонт протезов</button>
         </div>
 
         <div id="crowns" class="tab-content active">
@@ -303,6 +319,13 @@
           <div class="service-row"><div class="service-info"><h3>Бюгельный протез</h3><p>На кламмерах</p></div><div class="service-price">45 000 ₽</div></div>
           <div class="service-row"><div class="service-info"><h3>Бюгельный протез</h3><p>На аттачменах</p></div><div class="service-price">70 000 ₽</div></div>
           <div class="service-row"><div class="service-info"><h3>Бюгельный протез</h3><p>С нейлоновым базисом</p></div><div class="service-price">36 000 ₽</div></div>
+        </div>
+
+        <!-- Содержимое вкладки Ремонт протезов -->
+        <div id="repair" class="tab-content">
+          <div class="service-row"><div class="service-info"><h3>Устранение перелома базиса (починка)</h3><p>Один перелом</p></div><div class="service-price">2 000 ₽</div></div>
+          <div class="service-row"><div class="service-info"><h3>Замена или установка зуба в протезе</h3><p>За 1 дополнительный зуб</p></div><div class="service-price">2 500 ₽</div></div>
+          <div class="service-row"><div class="service-info"><h3>Замена или перенос кламмера</h3><p>Один кламмер</p></div><div class="service-price">2 000 ₽</div></div>
         </div>
         
         <div style="text-align: center; margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.5);">
@@ -346,9 +369,12 @@
           <div class="contact-item"><h4>E-mail</h4><p>arik92ladra@yandex.ru</p></div>
           <div class="contact-item"><h4>Режим работы</h4><p>Пн-Пт: 13:00 – 20:00<br>Сб-Вс: Выходной</p></div>
         </div>
-        <div class="glass-panel" style="display:flex; align-items:center; justify-content:center;">
-          <p style="color:rgba(255,255,255,0.4); font-size:14px;">Здесь будет виджет Яндекс Карт</p>
+        
+        <!-- Добавлен виджет Яндекс Карт -->
+        <div class="map-container">
+          <iframe src="https://yandex.ru/map-widget/v1/?text=г.%20Свободный,%20ул.%2050%20лет%20Октября,%20д.%2033" width="100%" height="100%" frameborder="0" allowfullscreen="true" style="position:relative;"></iframe>
         </div>
+
       </div>
     </div>
   </section>
@@ -358,7 +384,7 @@
       <p>&copy; 2026 Стоматологический кабинет «Ваш стоматолог».</p>
       <p>ИП Вартанян Артур Аршакович (ОГРНИП 313280706400037, ИНН 280721805368).</p>
       <p>Лицензия на осуществление медицинской деятельности Л041-01123-28/00289180 от 06.09.2013 г.</p>
-      <p style="margin-top: 15px;"><a href="info.html" style="text-decoration: underline; color: rgba(255,255,255,0.7);">Правовая информация и правила приема пациентов</a></p>
+      <p style="margin-top: 15px;"><a href="info.html" style="text-decoration: underline; color: rgba(255,255,255,0.7);" class="hover-target">Правовая информация и правила приема пациентов</a></p>
     </div>
   </footer>
 
