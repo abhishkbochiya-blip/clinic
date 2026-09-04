@@ -99,8 +99,11 @@
     .section-title h2 { font-size: 36px; font-weight: 300; }
     .ba-container { position: relative; max-width: 800px; height: 450px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); }
     .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; color: rgba(255,255,255,0.3); }
+    
+    /* Ссылки на картинки ДО и ПОСЛЕ */
     .ba-after { background: url('after.jpg') center/cover no-repeat; z-index: 1; color: transparent; }
     .ba-before { background: url('before.jpg') center/cover no-repeat; z-index: 2; clip-path: inset(0 50% 0 0); color: transparent; }
+    
     .ba-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; outline: none; background: transparent; -webkit-appearance: none; z-index: 4; margin: 0; }
     .ba-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 4px; height: 450px; background: transparent; }
     .ba-line { position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: #ffffff; z-index: 3; transform: translateX(-50%); }
@@ -133,7 +136,6 @@
     .contact-item { margin-bottom: 30px; }
     .contact-item h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.5); margin-bottom: 5px; }
     
-    /* Стили для Яндекс Карты */
     .map-container { width: 100%; height: 100%; min-height: 350px; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
 
     footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); z-index: 10; position: relative; line-height: 1.8;}
@@ -157,21 +159,19 @@
     body.a11y-mode .popup-form input, body.a11y-mode .popup-form select { background: #fff; border: 2px solid #000 !important; border-radius: 0; color: #000 !important; }
     body.a11y-mode .special-offer { border-color: #000; background: transparent; }
 
-    @media (max-width: 900px) { .hero-grid, .contacts-grid { grid-template-columns: 1fr; } .header-content { flex-direction: column; padding: 20px; gap: 15px; border-radius: 20px; } nav ul { flex-wrap: wrap; justify-content: center; } .cursor-dot, .cursor-outline { display: none; } }
+    /* Обновлено для мобильных телефонов (чтобы фото врача было красивым) */
+    @media (max-width: 900px) { .hero-grid, .contacts-grid { grid-template-columns: 1fr; } .header-content { flex-direction: column; padding: 20px; gap: 15px; border-radius: 20px; } nav ul { flex-wrap: wrap; justify-content: center; } .cursor-dot, .cursor-outline { display: none; } .doctor-section .glass-panel { grid-template-columns: 1fr !important; } .doctor-section .glass-panel > div:first-child { min-height: 350px; border-radius: 20px 20px 0 0 !important; background-position: top center !important; } .doctor-section .glass-panel > div:last-child { padding: 30px !important; } }
   </style>
 </head>
 <body>
 
-  <!-- Прелоадер -->
   <div id="preloader">
     <div class="preloader-content">Ваш<span>Стоматолог</span></div>
   </div>
 
-  <!-- Кастомный курсор -->
   <div class="cursor-dot" id="cursor-dot"></div>
   <div class="cursor-outline" id="cursor-outline"></div>
 
-  <!-- Фон -->
   <div class="bg-animation">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
@@ -196,10 +196,8 @@
     </div>
   </header>
 
-  <!-- Плавающая кнопка (FAB) -->
   <a href="tel:+79145878820" class="fab hover-target">📞</a>
 
-  <!-- Модальное окно -->
   <div class="popup-overlay" id="popupOverlay" onclick="closePopup(event)">
     <div class="popup-content glass-panel" onclick="event.stopPropagation()">
       <span class="popup-close hover-target" onclick="closePopup(event, true)">×</span>
@@ -227,7 +225,6 @@
         <h1>Профессиональное протезирование зубов <br><strong>в г. Свободный</strong></h1>
         <p>Кабинет врача-стоматолога-ортопеда Вартаняна Артура Аршаковича. Возвращаем уверенность и комфорт вашей улыбке с 2013 года.</p>
         
-        <!-- Добавлено УТП про выезд на дом -->
         <div class="special-offer">
           <strong>🚗 Доступен вызов врача на дом</strong><br>
           <span style="font-size: 14px; font-weight: 300;">Удобное решение для маломобильных пациентов (2000 ₽)</span>
@@ -253,7 +250,6 @@
     </div>
   </section>
 
-  <!-- Бегущая строка -->
   <div class="marquee-container reveal">
     <div class="marquee-content">
       <span>• Коронки и протезы любой сложности •</span>
@@ -277,6 +273,34 @@
     </div>
   </section>
 
+  <!-- НОВЫЙ БЛОК О ВРАЧЕ -->
+  <section class="doctor-section" style="padding: 80px 0;">
+    <div class="container reveal">
+      <div class="glass-panel" style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center; padding: 0; overflow: hidden;">
+        
+        <!-- Ссылка на файл doctor.jpg, который ты загрузил -->
+        <div style="width: 100%; height: 100%; min-height: 400px; background: url('doctor.jpg') center/cover no-repeat; border-radius: 20px 0 0 20px;"></div>
+        
+        <div style="padding: 40px 40px 40px 0;">
+          <h4 style="color: #2acfc4; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;">Ведущий специалист</h4>
+          <h2 style="font-size: 32px; font-weight: 300; margin-bottom: 20px;">Вартанян Артур Аршакович</h2>
+          <p style="color: rgba(255,255,255,0.7); margin-bottom: 20px; font-weight: 300;">
+            Врач-стоматолог-ортопед с многолетним стажем. Специализируется на сложных случаях протезирования, возвращая пациентам эстетику улыбки и полноценную жевательную функцию.
+          </p>
+          <ul style="list-style: none; color: rgba(255,255,255,0.8); font-size: 15px; font-weight: 300; margin-bottom: 30px;">
+            <li style="margin-bottom: 10px;">✔️ <strong>Опыт работы:</strong> более 20 лет (с 2005 года)</li>
+            <li style="margin-bottom: 10px;">✔️ <strong>Образование:</strong> Диплом ВСБ 0623064 «Стоматология»</li>
+            <li style="margin-bottom: 10px;">✔️ <strong>Квалификация:</strong> Периодическая аккредитация (от 21.05.2024)</li>
+          </ul>
+          <div class="btn-magnetic-wrap hover-target" style="margin: 0; padding: 0;">
+            <button class="btn magnetic-btn" onclick="openPopup()">Записаться к врачу</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <section class="portfolio" id="portfolio">
     <div class="container reveal">
       <div class="section-title"><h2>Результаты протезирования</h2></div>
@@ -289,7 +313,6 @@
     </div>
   </section>
 
-  <!-- Вкладки с прайсом -->
   <section class="services" id="services">
     <div class="container reveal">
       <div class="glass-panel">
@@ -298,7 +321,6 @@
           <button class="tab-btn active hover-target" onclick="openTab('crowns')">Несъемные протезы</button>
           <button class="tab-btn hover-target" onclick="openTab('removable')">Съемные протезы</button>
           <button class="tab-btn hover-target" onclick="openTab('clasp')">Бюгельные протезы</button>
-          <!-- Добавлена вкладка Ремонт протезов -->
           <button class="tab-btn hover-target" onclick="openTab('repair')">Ремонт протезов</button>
         </div>
 
@@ -321,7 +343,6 @@
           <div class="service-row"><div class="service-info"><h3>Бюгельный протез</h3><p>С нейлоновым базисом</p></div><div class="service-price">36 000 ₽</div></div>
         </div>
 
-        <!-- Содержимое вкладки Ремонт протезов -->
         <div id="repair" class="tab-content">
           <div class="service-row"><div class="service-info"><h3>Устранение перелома базиса (починка)</h3><p>Один перелом</p></div><div class="service-price">2 000 ₽</div></div>
           <div class="service-row"><div class="service-info"><h3>Замена или установка зуба в протезе</h3><p>За 1 дополнительный зуб</p></div><div class="service-price">2 500 ₽</div></div>
@@ -335,7 +356,6 @@
     </div>
   </section>
 
-  <!-- Блок FAQ -->
   <section class="faq" id="faq">
     <div class="container reveal">
       <div class="section-title">
@@ -370,7 +390,6 @@
           <div class="contact-item"><h4>Режим работы</h4><p>Пн-Пт: 13:00 – 20:00<br>Сб-Вс: Выходной</p></div>
         </div>
         
-        <!-- Добавлен виджет Яндекс Карт -->
         <div class="map-container">
           <iframe src="https://yandex.ru/map-widget/v1/?text=г.%20Свободный,%20ул.%2050%20лет%20Октября,%20д.%2033" width="100%" height="100%" frameborder="0" allowfullscreen="true" style="position:relative;"></iframe>
         </div>
@@ -389,7 +408,6 @@
   </footer>
 
   <script>
-    // 1. ПРЕЛОАДЕР И СТАРТ АНИМАЦИЙ
     window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('preloader').classList.add('loaded');
@@ -400,7 +418,6 @@
       }, 1000); 
     });
 
-    // 2. КАСТОМНЫЙ КУРСОР И МАГНИТНЫЕ КНОПКИ
     if (window.innerWidth > 992) {
       const cursorDot = document.getElementById('cursor-dot');
       const cursorOutline = document.getElementById('cursor-outline');
@@ -434,7 +451,6 @@
       });
     }
 
-    // 3. УМНАЯ ШАПКА
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
       const currentScroll = window.pageYOffset;
@@ -447,7 +463,6 @@
       lastScroll = currentScroll;
     });
 
-    // 4. СЛАБОВИДЯЩИЕ
     document.getElementById('a11y-toggle').addEventListener('click', () => {
       document.body.classList.toggle('a11y-mode');
       const btn = document.getElementById('a11y-toggle');
@@ -459,17 +474,14 @@
       }
     });
 
-    // 5. МОДАЛЬНОЕ ОКНО
     const popup = document.getElementById('popupOverlay');
     function openPopup() { popup.classList.add('active'); document.body.style.overflow = 'hidden'; }
     function closePopup(event, force = false) {
       if (force || event.target === popup) { popup.classList.remove('active'); document.body.style.overflow = 'auto'; }
     }
 
-    // 6. АККОРДЕОН FAQ
     function toggleFaq(element) { element.classList.toggle('active'); }
 
-    // 7. ТАБЫ УСЛУГ
     function openTab(tabName) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -477,7 +489,6 @@
       event.currentTarget.classList.add('active');
     }
 
-    // 8. СЛАЙДЕР ДО/ПОСЛЕ
     const slider = document.getElementById('ba-slider');
     const beforeImg = document.getElementById('before-img');
     const baLine = document.getElementById('ba-line');
