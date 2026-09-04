@@ -35,6 +35,8 @@
     nav a { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: rgba(255, 255, 255, 0.7); transition: color 0.3s; }
     nav a:hover { color: #ffffff; }
     .header-phone { font-weight: 600; font-size: 15px; letter-spacing: 1px; }
+    .a11y-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+    .a11y-btn:hover { background: rgba(255,255,255,0.1); }
 
     /* Контент страницы */
     .page-header { padding: 150px 0 50px; text-align: center; }
@@ -59,6 +61,18 @@
 
     footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); z-index: 10; position: relative; margin-top: 80px;}
 
+    /* ========================================= */
+    /* РЕЖИМ ДЛЯ СЛАБОВИДЯЩИХ (ВЫСОКИЙ КОНТРАСТ) */
+    /* ========================================= */
+    body.a11y-mode { background: #ffffff !important; color: #000000 !important; cursor: auto !important; }
+    body.a11y-mode * { color: #000000 !important; font-weight: 700 !important; letter-spacing: 1px; cursor: auto !important; }
+    body.a11y-mode .bg-animation, body.a11y-mode .cursor-dot, body.a11y-mode .cursor-outline { display: none !important; }
+    body.a11y-mode .glass-panel { background: #ffffff !important; border: 3px solid #000000 !important; backdrop-filter: none !important; box-shadow: none !important; }
+    body.a11y-mode .header-content { background: #ffffff !important; border: 3px solid #000000 !important; border-radius: 0 !important; }
+    body.a11y-mode header.hidden { transform: none !important; }
+    body.a11y-mode .a11y-btn { background: #000000 !important; color: #ffffff !important; border: 2px solid #000000 !important; }
+    body.a11y-mode .cert-placeholder { border: 2px dashed #000 !important; color: #000 !important; }
+
     @media (max-width: 900px) { .doctor-grid { grid-template-columns: 1fr; } .header-content { flex-direction: column; gap: 15px; } nav ul { flex-wrap: wrap; justify-content: center; } .cursor-dot, .cursor-outline { display: none; } }
   </style>
 </head>
@@ -80,6 +94,7 @@
             <li><a href="info.html" class="hover-target">Правовая информация</a></li>
           </ul>
         </nav>
+        <button id="a11y-toggle" class="a11y-btn hover-target">👁 Версия для слабовидящих</button>
         <div class="header-phone">+7 (914) 587-88-20</div>
       </div>
     </div>
@@ -126,6 +141,7 @@
   </footer>
 
   <script>
+    // Кастомный курсор
     if (window.innerWidth > 992) {
       const cursorDot = document.getElementById('cursor-dot');
       const cursorOutline = document.getElementById('cursor-outline');
@@ -135,11 +151,36 @@
         const x = (e.clientX / window.innerWidth - 0.5) * 40; const y = (e.clientY / window.innerHeight - 0.5) * 40;
         document.documentElement.style.setProperty('--mx', `${x}px`); document.documentElement.style.setProperty('--my', `${y}px`);
       });
-      document.querySelectorAll('.hover-target, a').forEach(el => {
+      document.querySelectorAll('.hover-target, a, button').forEach(el => {
         el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
         el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
       });
     }
+
+    // Умная шапка
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      const header = document.getElementById('header');
+      if (currentScroll > lastScroll && currentScroll > 100 && !document.body.classList.contains('a11y-mode')) {
+        header.classList.add('hidden');
+      } else {
+        header.classList.remove('hidden');
+      }
+      lastScroll = currentScroll;
+    });
+
+    // Версия для слабовидящих
+    document.getElementById('a11y-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('a11y-mode');
+      const btn = document.getElementById('a11y-toggle');
+      if (document.body.classList.contains('a11y-mode')) {
+        btn.innerText = '👁 Обычная версия';
+        document.getElementById('header').classList.remove('hidden');
+      } else {
+        btn.innerText = '👁 Версия для слабовидящих';
+      }
+    });
   </script>
 </body>
 </html>
