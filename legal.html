@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Юридические документы | ВАА Стоматолог</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; transition: background 0.3s, color 0.3s; }
+    body { color: #ffffff; line-height: 1.6; background-color: #050b14; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    @media (min-width: 992px) { body, a, button { cursor: none !important; } }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 10; }
+
+    .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
+    .cursor-dot { width: 8px; height: 8px; background: #2acfc4; transition: opacity 0.3s; }
+    .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(42, 207, 196, 0.5); transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s; }
+    .cursor-hover .cursor-outline { width: 60px; height: 60px; background: rgba(42, 207, 196, 0.1); border-color: #2acfc4; }
+
+    .bg-animation { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; overflow: hidden; background: #050b14; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; transition: transform 0.1s linear; }
+    .orb-1 { width: 500px; height: 500px; background: #0f5c53; top: -100px; left: -100px; transform: translate(var(--mx, 0), var(--my, 0)); }
+    .orb-2 { width: 600px; height: 600px; background: #0b3954; bottom: -150px; right: -100px; transform: translate(calc(var(--mx, 0) * -1.5), calc(var(--my, 0) * -1.5)); }
+
+    header { padding: 20px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: transform 0.4s ease; }
+    header.hidden { transform: translateY(-100%); }
+    .header-content { display: flex; justify-content: space-between; align-items: center; background: rgba(10, 15, 20, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 30px; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); flex-wrap: wrap; gap: 10px; }
+    .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .logo span { color: #2acfc4; }
+    nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
+    nav a { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: rgba(255, 255, 255, 0.7); transition: color 0.3s; }
+    nav a:hover { color: #ffffff; }
+    .header-phone { font-weight: 600; font-size: 15px; letter-spacing: 1px; }
+    .a11y-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+    .a11y-btn:hover { background: rgba(255,255,255,0.1); }
+
+    .page-title { padding: 150px 0 50px; text-align: center; }
+    .page-title h1 { font-size: 42px; font-weight: 300; }
+    
+    .legal-content { padding-bottom: 80px; }
+    .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+    .legal-section h2 { font-size: 24px; font-weight: 500; color: #2acfc4; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-top: 30px;}
+    .legal-section p, .legal-section ul { font-size: 15px; color: rgba(255,255,255,0.8); margin-bottom: 15px; font-weight: 300; }
+    .legal-section ul { padding-left: 20px; }
+    .legal-section li { margin-bottom: 8px; }
+
+    footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); z-index: 10; position: relative;}
+
+    /* РЕЖИМ ДЛЯ СЛАБОВИДЯЩИХ */
+    body.a11y-mode { background: #ffffff !important; color: #000000 !important; cursor: auto !important; }
+    body.a11y-mode * { color: #000000 !important; font-weight: 700 !important; letter-spacing: 1px; cursor: auto !important; }
+    body.a11y-mode .bg-animation, body.a11y-mode .cursor-dot, body.a11y-mode .cursor-outline { display: none !important; }
+    body.a11y-mode .glass-panel { background: #ffffff !important; border: 3px solid #000000 !important; backdrop-filter: none !important; box-shadow: none !important; }
+    body.a11y-mode .header-content { background: #ffffff !important; border: 3px solid #000000 !important; border-radius: 0 !important; }
+    body.a11y-mode header.hidden { transform: none !important; }
+    body.a11y-mode .a11y-btn { background: #000000 !important; color: #ffffff !important; border: 2px solid #000000 !important; }
+
+    @media (max-width: 900px) { .header-content { flex-direction: column; gap: 15px; } nav ul { flex-wrap: wrap; justify-content: center; } .cursor-dot, .cursor-outline { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-outline" id="cursor-outline"></div>
+  <div class="bg-animation"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
+  
+  <header id="header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">ВАА<span>Стоматолог</span></div>
+        <nav>
+          <ul>
+            <li><a href="index.html" class="hover-target">Главная</a></li>
+            <li><a href="doctor.html" class="hover-target">О враче</a></li>
+            <li><a href="index.html#services" class="hover-target">Прайс</a></li>
+            <li><a href="legal.html" class="hover-target" style="color: #2acfc4;">Правовая информация</a></li>
+          </ul>
+        </nav>
+        <button id="a11y-toggle" class="a11y-btn hover-target">👁 Версия для слабовидящих</button>
+        <div class="header-phone">+7 (914) 587-88-20</div>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-title">
+    <div class="container">
+      <h1>Юридические документы</h1>
+    </div>
+  </section>
+
+  <section class="legal-content">
+    <div class="container">
+      <div class="glass-panel legal-section">
+        <h2>Политика конфиденциальности</h2>
+        <p>[ЗДЕСЬ БУДЕТ ТЕКСТ ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ, КОТОРЫЙ СКАЖЕТ ВРАЧ]</p>
+        
+        <h2>Согласие на обработку персональных данных</h2>
+        <p>[ЗДЕСЬ БУДЕТ ТЕКСТ СОГЛАСИЯ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ]</p>
+        
+        <h2>Реквизиты и лицензия</h2>
+        <p>Индивидуальный предприниматель Вартанян Артур Аршакович</p>
+        <p><strong>ОГРНИП:</strong> 313280706400037</p>
+        <p><strong>ИНН:</strong> 280721805368</p>
+        <p><strong>Лицензия:</strong> Л041-01123-28/00289180 от 06.09.2013 г.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Стоматологический кабинет «ВАА Стоматолог».</p>
+    </div>
+  </footer>
+
+  <script>
+    if (window.innerWidth > 992) {
+      const cursorDot = document.getElementById('cursor-dot');
+      const cursorOutline = document.getElementById('cursor-outline');
+      window.addEventListener('mousemove', function(e) {
+        cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+        setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50);
+        const x = (e.clientX / window.innerWidth - 0.5) * 40; const y = (e.clientY / window.innerHeight - 0.5) * 40;
+        document.documentElement.style.setProperty('--mx', `${x}px`); document.documentElement.style.setProperty('--my', `${y}px`);
+      });
+      document.querySelectorAll('.hover-target, a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+      });
+    }
+
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      const header = document.getElementById('header');
+      if (currentScroll > lastScroll && currentScroll > 100 && !document.body.classList.contains('a11y-mode')) {
+        header.classList.add('hidden');
+      } else {
+        header.classList.remove('hidden');
+      }
+      lastScroll = currentScroll;
+    });
+
+    document.getElementById('a11y-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('a11y-mode');
+      const btn = document.getElementById('a11y-toggle');
+      if (document.body.classList.contains('a11y-mode')) {
+        btn.innerText = '👁 Обычная версия';
+        document.getElementById('header').classList.remove('hidden');
+      } else {
+        btn.innerText = '👁 Версия для слабовидящих';
+      }
+    });
+  </script>
+</body>
+</html>
