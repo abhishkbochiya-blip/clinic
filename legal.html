@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Юридические документы | ВАА Стоматолог</title>
+  <title>Документация и Инфо | ВАА Стоматолог</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -49,13 +49,15 @@
     .doc-link { display: inline-flex; align-items: center; gap: 10px; background: rgba(42, 207, 196, 0.1); border: 1px solid #2acfc4; color: #2acfc4; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; transition: 0.3s; }
     .doc-link:hover { background: #2acfc4; color: #000; }
 
+    .authorities-box { background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; border-left: 3px solid #2acfc4; margin-bottom: 20px; }
+    .authorities-box p { margin-bottom: 5px; font-size: 13px; }
+
     footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); z-index: 10; position: relative;}
 
-    /* РЕЖИМ ДЛЯ СЛАБОВИДЯЩИХ */
     body.a11y-mode { background: #ffffff !important; color: #000000 !important; cursor: auto !important; }
     body.a11y-mode * { color: #000000 !important; font-weight: 700 !important; letter-spacing: 1px; cursor: auto !important; }
     body.a11y-mode .bg-animation, body.a11y-mode .cursor-dot, body.a11y-mode .cursor-outline { display: none !important; }
-    body.a11y-mode .glass-panel { background: #ffffff !important; border: 3px solid #000000 !important; backdrop-filter: none !important; box-shadow: none !important; }
+    body.a11y-mode .glass-panel, body.a11y-mode .authorities-box { background: #ffffff !important; border: 3px solid #000000 !important; backdrop-filter: none !important; box-shadow: none !important; }
     body.a11y-mode .header-content { background: #ffffff !important; border: 3px solid #000000 !important; border-radius: 0 !important; }
     body.a11y-mode header.hidden { transform: none !important; }
     body.a11y-mode .a11y-btn { background: #000000 !important; color: #ffffff !important; border: 2px solid #000000 !important; }
@@ -75,9 +77,9 @@
         <nav>
           <ul>
             <li><a href="index.html" class="hover-target">Главная</a></li>
-            <li><a href="doctor.html" class="hover-target">О враче</a></li>
+            <li><a href="doctor.html" class="hover-target">Специалисты</a></li>
             <li><a href="index.html#services" class="hover-target">Прайс</a></li>
-            <li><a href="legal.html" class="hover-target" style="color: #2acfc4;">Правовая информация</a></li>
+            <li><a href="legal.html" class="hover-target" style="color: #2acfc4;">Документация и Инфо</a></li>
           </ul>
         </nav>
         <button id="a11y-toggle" class="a11y-btn hover-target">👁 Версия для слабовидящих</button>
@@ -88,7 +90,7 @@
 
   <section class="page-title">
     <div class="container">
-      <h1>Юридические документы</h1>
+      <h1>Документация и Информация</h1>
     </div>
   </section>
 
@@ -108,13 +110,30 @@
           <a href="ОГРН.pdf" target="_blank" class="doc-link hover-target">📄 Свидетельство ОГРНИП</a>
         </div>
 
-        <h2>Политика конфиденциальности и обработка данных</h2>
-        <p>Настоящая Политика составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые ИП Вартанян А.А. (далее — Оператор).</p>
+        <h2>Контролирующие и надзорные органы</h2>
+        <div class="authorities-box">
+          <p><strong>Министерство здравоохранения Амурской области</strong></p>
+          <p>Министр здравоохранения Амурской области: Леонтьева Светлана Николаевна.</p>
+          <p>г. Благовещенск, ул. Ленина 135, тел. 8(4162) 200-769, email: zdrav@amurobl.ru</p>
+        </div>
+        
+        <div class="authorities-box">
+          <p><strong>Служба лицензирования</strong></p>
+          <p>Главный специалист-эксперт Невзорова Ольга Анатольевна: +7 (4162) 53-96-67</p>
+          <p>Главный специалист-эксперт Корниенко Елена Николаевна: +7 (4162) 53-96-67</p>
+        </div>
+
+        <div class="authorities-box">
+          <p><strong>Управление Роспотребнадзора по Амурской области</strong></p>
+          <p>Управление Федеральной службы по надзору в сфере защиты прав потребителей и благополучия человека по Амурской области. Курганова Ольга Петровна.</p>
+          <p>г. Благовещенск, ул. Первомайская 30, тел. 8(4162) 52-56-29</p>
+        </div>
+
+        <h2>Политика конфиденциальности и использование файлов Cookie</h2>
+        <p>Настоящая Политика составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных».</p>
         <ul>
-          <li>Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.</li>
-          <li>Настоящая политика Оператора в отношении обработки персональных данных применяется ко всей информации, которую Оператор может получить о посетителях данного веб-сайта.</li>
-          <li>Обработка персональных данных (имя, номер телефона), предоставляемых пользователем через форму обратной связи, осуществляется исключительно в целях записи на медицинский прием и консультирования.</li>
-          <li>Оставляя свои данные в форме обратной связи на сайте, Пользователь дает свое однозначное <strong>согласие на обработку персональных данных</strong>.</li>
+          <li>Сайт использует файлы cookie для обеспечения корректной работы и улучшения пользовательского опыта. Используя данный сайт, вы соглашаетесь с применением файлов cookie.</li>
+          <li>Обработка персональных данных (имя, номер телефона), в случае их предоставления пользователем, осуществляется исключительно в целях медицинского консультирования и записи на прием по телефону.</li>
           <li>Данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства РФ.</li>
         </ul>
 
