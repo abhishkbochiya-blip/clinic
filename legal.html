@@ -41,9 +41,13 @@
     .legal-content { padding-bottom: 80px; }
     .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
     .legal-section h2 { font-size: 24px; font-weight: 500; color: #2acfc4; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-top: 30px;}
-    .legal-section p, .legal-section ul { font-size: 15px; color: rgba(255,255,255,0.8); margin-bottom: 15px; font-weight: 300; }
+    .legal-section p, .legal-section ul { font-size: 14px; color: rgba(255,255,255,0.8); margin-bottom: 15px; font-weight: 300; }
     .legal-section ul { padding-left: 20px; }
     .legal-section li { margin-bottom: 8px; }
+    
+    .doc-links { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px; }
+    .doc-link { display: inline-flex; align-items: center; gap: 10px; background: rgba(42, 207, 196, 0.1); border: 1px solid #2acfc4; color: #2acfc4; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; transition: 0.3s; }
+    .doc-link:hover { background: #2acfc4; color: #000; }
 
     footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); z-index: 10; position: relative;}
 
@@ -91,17 +95,29 @@
   <section class="legal-content">
     <div class="container">
       <div class="glass-panel legal-section">
-        <h2>Политика конфиденциальности</h2>
-        <p>[ЗДЕСЬ БУДЕТ ТЕКСТ ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ, КОТОРЫЙ СКАЖЕТ ВРАЧ]</p>
         
-        <h2>Согласие на обработку персональных данных</h2>
-        <p>[ЗДЕСЬ БУДЕТ ТЕКСТ СОГЛАСИЯ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ]</p>
-        
-        <h2>Реквизиты и лицензия</h2>
-        <p>Индивидуальный предприниматель Вартанян Артур Аршакович</p>
-        <p><strong>ОГРНИП:</strong> 313280706400037</p>
+        <h2>Реквизиты и правоустанавливающие документы</h2>
+        <p><strong>Индивидуальный предприниматель Вартанян Артур Аршакович</strong></p>
         <p><strong>ИНН:</strong> 280721805368</p>
-        <p><strong>Лицензия:</strong> Л041-01123-28/00289180 от 06.09.2013 г.</p>
+        <p><strong>ОГРНИП:</strong> 313280706400037 (от 05.03.2013 г.)</p>
+        <p><strong>Лицензия на осуществление медицинской деятельности:</strong> № ЛО-28-01-000864 от 06.09.2013 г. Выдана Министерством здравоохранения Амурской области.</p>
+        
+        <div class="doc-links">
+          <a href="001.jpg" target="_blank" class="doc-link hover-target">📄 Скан Лицензии</a>
+          <a href="ИНН.pdf" target="_blank" class="doc-link hover-target">📄 Свидетельство ИНН</a>
+          <a href="ОГРН.pdf" target="_blank" class="doc-link hover-target">📄 Свидетельство ОГРНИП</a>
+        </div>
+
+        <h2>Политика конфиденциальности и обработка данных</h2>
+        <p>Настоящая Политика составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных» и определяет порядок обработки персональных данных и меры по обеспечению безопасности персональных данных, предпринимаемые ИП Вартанян А.А. (далее — Оператор).</p>
+        <ul>
+          <li>Оператор ставит своей важнейшей целью и условием осуществления своей деятельности соблюдение прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну.</li>
+          <li>Настоящая политика Оператора в отношении обработки персональных данных применяется ко всей информации, которую Оператор может получить о посетителях данного веб-сайта.</li>
+          <li>Обработка персональных данных (имя, номер телефона), предоставляемых пользователем через форму обратной связи, осуществляется исключительно в целях записи на медицинский прием и консультирования.</li>
+          <li>Оставляя свои данные в форме обратной связи на сайте, Пользователь дает свое однозначное <strong>согласие на обработку персональных данных</strong>.</li>
+          <li>Данные Пользователя никогда, ни при каких условиях не будут переданы третьим лицам, за исключением случаев, связанных с исполнением действующего законодательства РФ.</li>
+        </ul>
+
       </div>
     </div>
   </section>
@@ -127,7 +143,6 @@
         el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
       });
     }
-
     let lastScroll = 0;
     window.addEventListener('scroll', () => {
       const currentScroll = window.pageYOffset;
@@ -139,7 +154,6 @@
       }
       lastScroll = currentScroll;
     });
-
     document.getElementById('a11y-toggle').addEventListener('click', () => {
       document.body.classList.toggle('a11y-mode');
       const btn = document.getElementById('a11y-toggle');
