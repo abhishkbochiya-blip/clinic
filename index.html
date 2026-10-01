@@ -199,7 +199,7 @@
   <section class="features" id="about">
     <div class="container">
       <div class="features-grid">
-        <div class="glass-panel reveal"><div class="feature-icon">👨‍⚕️️</div><h3>Опыт с 2005 года</h3><p>Прием ведет опытный врач-стоматолог-ортопед.</p></div>
+        <div class="glass-panel reveal"><div class="feature-icon">👨‍⚕</div><h3>Опыт с 2005 года</h3><p>Прием ведет опытный врач-стоматолог-ортопед.</p></div>
         <div class="glass-panel reveal" style="transition-delay: 0.2s;"><div class="feature-icon">💎</div><h3>Современный подход</h3><p>Используем только качественные материалы и технологии.</p></div>
         <div class="glass-panel reveal" style="transition-delay: 0.4s;"><div class="feature-icon">🛡️</div><h3>Гарантия качества</h3><p>Официальный договор и гарантия на все виды протезирования.</p></div>
       </div>
@@ -288,7 +288,6 @@
           <div class="contact-item"><h4>E-mail</h4><p>arik92ladra@yandex.ru</p></div>
           <div class="contact-item"><h4>Режим работы</h4><p>Пн-Пт: 13:00 – 20:00<br>Сб-Вс: Выходной</p></div>
           
-          <!-- ВАЖНО: Добавлен блок с выжимкой из правил -->
           <div class="contact-item" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
             <h4 style="color: #2acfc4; font-size: 14px; margin-bottom: 10px;">Памятка пациенту</h4>
             <ul style="list-style: none; font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 300;">
@@ -307,7 +306,6 @@
     </div>
   </section>
 
-  <!-- ВАЖНО: Обновленный подвал с адресом из лицензии и ссылкой на правила -->
   <footer>
     <div class="container">
       <p>&copy; 2026 Стоматологический кабинет «ВАА Стоматолог».</p>
@@ -322,7 +320,6 @@
     </div>
   </footer>
 
-  <!-- Всплывающее окно Cookie -->
   <div id="cookie-banner">
     <div>
       <p><strong>Используя этот сайт, вы соглашаетесь с использованием файлов cookie.</strong></p>
@@ -334,15 +331,22 @@
   </div>
 
   <script>
-    window.addEventListener('load', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
-        document.getElementById('preloader').classList.add('loaded');
+        const preloader = document.getElementById('preloader');
+        if (preloader) preloader.classList.add('loaded');
+        
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
-      }, 1000); 
+      }, 300); 
     });
+
+    setTimeout(() => {
+      const preloader = document.getElementById('preloader');
+      if (preloader) preloader.classList.add('loaded');
+    }, 2000);
 
     if (window.innerWidth > 992) {
       const cursorDot = document.getElementById('cursor-dot');
@@ -417,7 +421,6 @@
       });
     }
 
-    // Логика баннера Cookie
     if (localStorage.getItem('cookieAccepted')) {
       document.getElementById('cookie-banner').style.display = 'none';
     }
