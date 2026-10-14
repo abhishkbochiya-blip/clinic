@@ -4,412 +4,1001 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ВАА Стоматолог | Протезирование зубов в Свободном</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Кабинет врача-стоматолога-ортопеда Вартаняна Артура Аршаковича в г. Свободный. Качественное протезирование зубов, индивидуальный подход.">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; transition: background 0.3s, color 0.3s; }
-    body { color: #ffffff; line-height: 1.6; background-color: #050b14; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-    @media (min-width: 992px) { body, a, button, input, select { cursor: none !important; } }
-    a { text-decoration: none; color: inherit; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 10; }
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent: #0ea5e9;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --radius: 16px;
+      --shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+    }
 
-    .cursor-dot, .cursor-outline { position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 9999; pointer-events: none; }
-    .cursor-dot { width: 8px; height: 8px; background: #2acfc4; transition: opacity 0.3s; }
-    .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(42, 207, 196, 0.5); transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s; }
-    .cursor-hover .cursor-outline { width: 60px; height: 60px; background: rgba(42, 207, 196, 0.1); border-color: #2acfc4; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    .bg-animation { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; overflow: hidden; background: #050b14; }
-    .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; transition: transform 0.1s linear; }
-    .orb-1 { width: 500px; height: 500px; background: #0f5c53; top: -100px; left: -100px; transform: translate(var(--mx, 0), var(--my, 0)); }
-    .orb-2 { width: 600px; height: 600px; background: #0b3954; bottom: -150px; right: -100px; transform: translate(calc(var(--mx, 0) * -1.5), calc(var(--my, 0) * -1.5)); }
+    html {
+      scroll-behavior: smooth;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+    }
 
-    .glass-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+    body {
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-    .btn-magnetic-wrap { display: inline-block; padding: 15px; margin: -15px; z-index: 20; position: relative; }
-    .btn { display: inline-block; padding: 16px 36px; background: linear-gradient(135deg, #188a83, #11625d); color: #ffffff; font-size: 14px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border: none; border-radius: 50px; text-align: center; transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s; will-change: transform; cursor: pointer; }
-    .btn:hover { box-shadow: 0 15px 25px rgba(17, 98, 93, 0.4); }
-    .btn-outline { background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: none; }
-    .btn-outline:hover { background: rgba(255, 255, 255, 0.1); border-color: #ffffff; }
+    /* === ПРИКОЛЬНАЯ ЗАСТАВКА (PRELOADER) === */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: opacity 0.65s ease, visibility 0.65s ease;
+    }
 
-    header { padding: 20px 0; position: fixed; top: 0; left: 0; width: 100%; z-index: 100; transition: transform 0.4s ease; }
-    header.hidden { transform: translateY(-100%); }
-    .header-content { display: flex; justify-content: space-between; align-items: center; background: rgba(10, 15, 20, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.05); padding: 15px 30px; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); flex-wrap: wrap; gap: 10px; }
-    .logo { font-size: 20px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-    .logo span { color: #2acfc4; }
-    nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
-    nav a { font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: rgba(255, 255, 255, 0.7); transition: color 0.3s; }
-    nav a:hover { color: #ffffff; }
-    .header-phone { font-weight: 600; font-size: 15px; letter-spacing: 1px; }
-    .a11y-btn { background: transparent; border: 1px solid rgba(255,255,255,0.3); color: white; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
-    .a11y-btn:hover { background: rgba(255,255,255,0.1); }
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
 
-    .fab { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: #2acfc4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; box-shadow: 0 10px 20px rgba(42, 207, 196, 0.4); z-index: 99; transition: transform 0.3s ease; animation: pulse-fab 2s infinite; color: #000; }
-    .fab:hover { transform: scale(1.1); }
-    @keyframes pulse-fab { 0% { box-shadow: 0 0 0 0 rgba(42, 207, 196, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(42, 207, 196, 0); } 100% { box-shadow: 0 0 0 0 rgba(42, 207, 196, 0); } }
+    .loader-logo-wrap {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
 
-    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
-    .reveal.active { opacity: 1; transform: translateY(0); }
+    .loader-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 3px solid rgba(56, 189, 248, 0.2);
+      border-top-color: #38bdf8;
+      animation: spin 1.2s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+    }
 
-    .hero { padding: 150px 0 60px; min-height: 100vh; display: flex; align-items: center; }
-    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
-    .hero-text h1 { font-size: 48px; font-weight: 300; line-height: 1.15; margin-bottom: 30px; }
-    .hero-text h1 strong { font-weight: 700; background: linear-gradient(to right, #ffffff, #2acfc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero-text p { font-size: 17px; color: rgba(255, 255, 255, 0.7); margin-bottom: 30px; font-weight: 300; max-width: 480px; }
-    .special-offer { background: rgba(42, 207, 196, 0.1); border-left: 4px solid #2acfc4; padding: 15px 20px; border-radius: 0 10px 10px 0; margin-bottom: 40px; display: inline-block; }
+    .loader-ring-inner {
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 255, 255, 0.25);
+      animation: spinReverse 3s linear infinite;
+    }
 
-    .marquee-container { width: 100%; overflow: hidden; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 15px 0; position: relative; z-index: 10; display: flex; white-space: nowrap; margin-top: 60px; }
-    .marquee-content { display: inline-block; animation: marquee 30s linear infinite; font-size: 12px; font-weight: 600; letter-spacing: 4px; color: rgba(255,255,255,0.4); text-transform: uppercase; }
-    .marquee-content span { margin: 0 40px; }
-    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .loader-tooth {
+      width: 48px;
+      height: 48px;
+      fill: #ffffff;
+      filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.7));
+      animation: pulseTooth 1.5s ease-in-out infinite;
+    }
 
-    .features { padding: 80px 0; }
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-    .feature-icon { font-size: 30px; margin-bottom: 20px; color: #2acfc4; }
+    .loader-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #ffffff, #bae6fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-    .portfolio { padding: 80px 0; text-align: center; }
-    .section-title { margin-bottom: 50px; text-align: center; }
-    .section-title h2 { font-size: 36px; font-weight: 300; }
-    .ba-container { position: relative; max-width: 800px; height: 450px; margin: 0 auto; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); }
-    .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; color: rgba(255,255,255,0.3); }
-    .ba-after { background: url('after.jpg') center/cover no-repeat; z-index: 1; color: transparent; }
-    .ba-before { background: url('before.jpg') center/cover no-repeat; z-index: 2; clip-path: inset(0 50% 0 0); color: transparent; }
-    .ba-slider { position: absolute; top: 0; left: 0; width: 100%; height: 100%; outline: none; background: transparent; -webkit-appearance: none; z-index: 4; margin: 0; }
-    .ba-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 4px; height: 450px; background: transparent; }
-    .ba-line { position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: #ffffff; z-index: 3; transform: translateX(-50%); }
+    .loader-subtitle {
+      font-size: 0.9rem;
+      color: #bae6fd;
+      opacity: 0.9;
+      margin-bottom: 20px;
+    }
 
-    .services { padding: 80px 0; }
-    .tabs-header { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap; }
-    .tab-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 12px 24px; border-radius: 30px; transition: all 0.3s; font-weight: 500; cursor: pointer; }
-    .tab-btn.active, .tab-btn:hover { background: #2acfc4; border-color: #2acfc4; color: #000; }
-    .tab-content { display: none; animation: fadeIn 0.5s ease; }
-    .tab-content.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .service-row { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-    .service-row:last-child { border-bottom: none; }
-    .service-info h3 { font-size: 17px; font-weight: 500; margin-bottom: 5px; }
-    .service-info p { font-size: 14px; color: rgba(255, 255, 255, 0.5); font-weight: 300; }
-    .service-price { font-size: 20px; font-weight: 600; color: #2acfc4; white-space: nowrap; margin-left: 20px; }
+    .loader-bar {
+      width: 180px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 99px;
+      overflow: hidden;
+    }
 
-    .faq { padding: 80px 0; }
-    .faq-list { max-width: 800px; margin: 0 auto; }
-    .faq-item { margin-bottom: 15px; padding: 25px; cursor: pointer; transition: 0.3s; }
-    .faq-question { display: flex; justify-content: space-between; align-items: center; font-size: 18px; font-weight: 500; }
-    .faq-icon { font-size: 24px; color: #2acfc4; transition: 0.3s; }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, margin-top 0.4s ease; opacity: 0; color: rgba(255,255,255,0.6); font-weight: 300; }
-    .faq-item.active { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.2); }
-    .faq-item.active .faq-answer { max-height: 200px; margin-top: 15px; opacity: 1; }
-    .faq-item.active .faq-icon { transform: rotate(45deg); }
+    .loader-progress {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, #ffffff);
+      border-radius: 99px;
+      animation: fillBar 1.4s ease-out forwards;
+    }
 
-    .contacts { padding: 80px 0 100px; }
-    .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-    .contact-item { margin-bottom: 30px; }
-    .contact-item h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: rgba(255, 255, 255, 0.5); margin-bottom: 5px; }
-    .map-container { width: 100%; height: 100%; min-height: 350px; border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinReverse {
+      to { transform: rotate(-360deg); }
+    }
+    @keyframes pulseTooth {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    @keyframes fillBar {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
 
-    /* COOKIE BANNER */
-    #cookie-banner { position: fixed; bottom: 20px; left: 24px; right: 24px; max-width: 800px; margin: 0 auto; background: rgba(10, 15, 20, 0.95); border: 1px solid #2acfc4; border-radius: 15px; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; gap: 20px; z-index: 10000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-    #cookie-banner p { font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.5; margin: 0; }
-    
-    footer { border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.4); z-index: 10; position: relative; line-height: 1.8;}
+    /* === ШАПКА САЙТА === */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
 
-    body.a11y-mode { background: #ffffff !important; color: #000000 !important; cursor: auto !important; }
-    body.a11y-mode * { color: #000000 !important; font-weight: 700 !important; letter-spacing: 1px; cursor: auto !important; }
-    body.a11y-mode .bg-animation, body.a11y-mode .cursor-dot, body.a11y-mode .cursor-outline { display: none !important; }
-    body.a11y-mode .glass-panel { background: #ffffff !important; border: 3px solid #000000 !important; backdrop-filter: none !important; box-shadow: none !important; }
-    body.a11y-mode .header-content, body.a11y-mode #cookie-banner { background: #ffffff !important; border: 3px solid #000000 !important; border-radius: 0 !important; }
-    body.a11y-mode header.hidden { transform: none !important; }
-    body.a11y-mode .btn, body.a11y-mode .tab-btn { background: #000000 !important; color: #ffffff !important; border: 2px solid #000000 !important; border-radius: 0 !important; transform: none !important; }
-    body.a11y-mode .btn:hover, body.a11y-mode .tab-btn.active { background: #ffffff !important; color: #000000 !important; }
-    body.a11y-mode .a11y-btn { background: #000000 !important; color: #ffffff !important; border: 2px solid #000000 !important; }
-    body.a11y-mode .service-row { border-bottom: 2px solid #000000 !important; }
-    body.a11y-mode h1 strong { -webkit-text-fill-color: #000000 !important; background: none !important; }
-    body.a11y-mode .fab { background: #000000 !important; color: #ffffff !important; animation: none !important; border-radius: 0 !important; }
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-    @media (max-width: 900px) { .hero-grid, .contacts-grid { grid-template-columns: 1fr; } .header-content { flex-direction: column; padding: 20px; gap: 15px; border-radius: 20px; } nav ul { flex-wrap: wrap; justify-content: center; } .cursor-dot, .cursor-outline { display: none; } #cookie-banner { flex-direction: column; text-align: center; } }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+    }
+
+    .brand-text strong {
+      display: block;
+      font-size: 1.15rem;
+      line-height: 1.2;
+      color: var(--text);
+    }
+
+    .brand-text span {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 24px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .header-phone {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 99px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+
+    .header-phone:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    /* === ГЛАВНЫЙ ЭКРАН (HERO) === */
+    .hero {
+      padding: 72px 0 64px;
+      background: radial-gradient(circle at 85% 20%, rgba(14, 165, 233, 0.12), transparent 45%),
+                  radial-gradient(circle at 10% 80%, rgba(2, 132, 199, 0.08), transparent 40%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 580px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 26px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #ffffff;
+      box-shadow: 0 8px 20px -4px rgba(2, 132, 199, 0.45);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 12px 24px -4px rgba(2, 132, 199, 0.6);
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .doctor-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .hero-card h2 {
+      font-size: 1.45rem;
+      margin-bottom: 12px;
+    }
+
+    .hero-card p {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+    }
+
+    .info-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      font-size: 0.92rem;
+    }
+
+    .info-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .info-list span {
+      color: var(--text-muted);
+    }
+
+    .info-list strong {
+      text-align: right;
+    }
+
+    /* === СЕКЦИИ === */
+    section {
+      padding: 64px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 44px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.25rem);
+      margin-bottom: 12px;
+      font-weight: 800;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #bae6fd;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-size: 1.4rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* === БЛОК ДОКУМЕНТОВ === */
+    .docs-section {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .doc-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border-radius: 6px;
+      background: #e0f2fe;
+      color: #0369a1;
+      margin-bottom: 10px;
+    }
+
+    .doc-card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 8px;
+    }
+
+    .doc-meta {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .doc-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .btn-sm {
+      padding: 10px 16px;
+      font-size: 0.88rem;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .btn-read {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+    }
+
+    .btn-read:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-download {
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-download:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* === КОНТАКТЫ === */
+    .contacts-box {
+      background: linear-gradient(135deg, #0f172a 0%, #0369a1 100%);
+      color: #ffffff;
+      border-radius: 24px;
+      padding: 44px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .contacts-box h2 {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .contacts-box p {
+      color: #bae6fd;
+      margin-bottom: 24px;
+    }
+
+    .contact-item {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 18px 20px;
+      border-radius: 14px;
+      margin-bottom: 12px;
+    }
+
+    .contact-item small {
+      display: block;
+      color: #bae6fd;
+      font-size: 0.8rem;
+      margin-bottom: 4px;
+    }
+
+    .contact-item strong, .contact-item a {
+      color: #ffffff;
+      font-size: 1.1rem;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    /* === МОДАЛЬНОЕ ОКНО ДЛЯ ЧТЕНИЯ ДОКУМЕНТОВ === */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-window {
+      background: #ffffff;
+      width: 100%;
+      max-width: 820px;
+      max-height: 86vh;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--bg);
+    }
+
+    .modal-header h3 {
+      font-size: 1.15rem;
+    }
+
+    .modal-close {
+      background: #e2e8f0;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .modal-body h4 {
+      margin: 18px 0 8px;
+      color: var(--primary-dark);
+    }
+
+    .modal-body p {
+      margin-bottom: 12px;
+      text-align: justify;
+    }
+
+    .modal-body ul {
+      padding-left: 20px;
+      margin-bottom: 14px;
+    }
+
+    /* === ПОДВАЛ === */
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      padding: 40px 0;
+      font-size: 0.9rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 24px;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+
+    .footer-links a:hover {
+      color: #38bdf8;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid, .contacts-box {
+        grid-template-columns: 1fr;
+      }
+      nav ul {
+        display: none;
+      }
+      .contacts-box {
+        padding: 28px 22px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-outline" id="cursor-outline"></div>
-  <div class="bg-animation"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
-
-  <header id="header">
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">ВАА<span>Стоматолог</span></div>
-        <nav>
-          <ul>
-            <li><a href="index.html" class="hover-target" style="color: #2acfc4;">Главная</a></li>
-            <li><a href="doctor.html" class="hover-target">Специалисты</a></li>
-            <li><a href="#services" class="hover-target">Прайс</a></li>
-            <li><a href="legal.html" class="hover-target">Документация и Инфо</a></li>
-          </ul>
-        </nav>
-        <button id="a11y-toggle" class="a11y-btn hover-target">👁 Версия для слабовидящих</button>
-        <div class="header-phone">+7 (914) 587-88-20</div>
-      </div>
+  <!-- ПРИКОЛЬНАЯ ЗАСТАВКА -->
+  <div id="preloader">
+    <div class="loader-logo-wrap">
+      <div class="loader-ring"></div>
+      <div class="loader-ring-inner"></div>
+      <svg class="loader-tooth" viewBox="0 0 24 24">
+        <path d="M12 2C9.5 2 7.8 3.2 6.5 3.2C4.8 3.2 3 4.8 3 8C3 11.5 4.8 14.2 5.6 17.5C6.2 20 7.1 22 8.5 22C9.8 22 10.3 19.5 11.2 17.2C11.5 16.5 12.5 16.5 12.8 17.2C13.7 19.5 14.2 22 15.5 22C16.9 22 17.8 20 18.4 17.5C19.2 14.2 21 11.5 21 8C21 4.8 19.2 3.2 17.5 3.2C16.2 3.2 14.5 2 12 2Z"/>
+      </svg>
     </div>
-  </header>
-
-  <a href="tel:+79145878820" class="fab hover-target">📞</a>
-
-  <section class="hero">
-    <div class="container hero-grid">
-      <div class="hero-text reveal">
-        <h1>Профессиональное протезирование зубов <br><strong>в г. Свободный</strong></h1>
-        <p>Кабинет врача-стоматолога-ортопеда Вартаняна Артура Аршаковича. Возвращаем уверенность и комфорт вашей улыбке с 2013 года.</p>
-        
-        <div class="special-offer">
-          <strong>🚗 Доступен вызов врача на дом</strong><br>
-          <span style="font-size: 14px; font-weight: 300;">Удобное решение для маломобильных пациентов (2000 ₽)</span>
-        </div>
-        <br>
-        <div class="btn-magnetic-wrap hover-target">
-          <a href="tel:+79145878820" class="btn magnetic-btn">Позвонить для записи</a>
-        </div>
-      </div>
-      <div class="glass-panel reveal" style="transition-delay: 0.2s;">
-        <h3 style="font-size: 24px; font-weight: 500; margin-bottom: 15px;">Связь с врачом</h3>
-        <p style="color: rgba(255,255,255,0.7); margin-bottom: 30px; font-weight: 300;">Прием ведется по предварительной записи. Выберите удобный способ связи.</p>
-        <div style="display: flex; flex-direction: column; gap: 0;">
-          <div class="btn-magnetic-wrap hover-target">
-            <a href="tel:+79145878820" class="btn magnetic-btn" style="width: 100%; display: block;">+7 (914) 587-88-20</a>
-          </div>
-          <p style="text-align: center; margin-top: 10px; font-size: 13px; color: rgba(255,255,255,0.5);">Ждем вашего звонка в рабочее время</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="marquee-container reveal">
-    <div class="marquee-content">
-      <span>• Коронки и протезы любой сложности •</span><span>• Опыт работы с 2005 года •</span><span>• Безопасно и безболезненно •</span><span>• Вызов врача на дом •</span>
-      <span>• Коронки и протезы любой сложности •</span><span>• Опыт работы с 2005 года •</span><span>• Безопасно и безболезненно •</span><span>• Вызов врача на дом •</span>
+    <div class="loader-title">ВАА Стоматолог</div>
+    <div class="loader-subtitle">Кабинет стоматологии ортопедической • г. Свободный</div>
+    <div class="loader-bar">
+      <div class="loader-progress"></div>
     </div>
   </div>
 
-  <section class="features" id="about">
+  <!-- ШАПКА -->
+  <header>
+    <div class="container nav-bar">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C9.5 2 7.8 3.2 6.5 3.2C4.8 3.2 3 4.8 3 8C3 11.5 4.8 14.2 5.6 17.5C6.2 20 7.1 22 8.5 22C9.8 22 10.3 19.5 11.2 17.2C11.5 16.5 12.5 16.5 12.8 17.2C13.7 19.5 14.2 22 15.5 22C16.9 22 17.8 20 18.4 17.5C19.2 14.2 21 11.5 21 8C21 4.8 19.2 3.2 17.5 3.2C16.2 3.2 14.5 2 12 2Z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <strong>ВАА Стоматолог</strong>
+          <span>г. Свободный, ул. 50 лет Октября, 31</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="doctor.html">Специалист</a></li>
+          <li><a href="#documents">Документы</a></li>
+          <li><a href="legal.html">Правовая информация</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+      </nav>
+
+      <a href="tel:+79145878820" class="header-phone">
+        8 (914) 587-88-20
+      </a>
+    </div>
+  </header>
+
+  <!-- ГЛАВНЫЙ БЛОК -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge">✓ Лицензия № Л041-01123-28/00289180</div>
+        <h1>Качественное <span>протезирование зубов</span> в Свободном</h1>
+        <p>Стоматологический кабинет индивидуального предпринимателя Вартаняна Артура Аршаковича. Индивидуальный подход, уважение к каждому пациенту и бережное восстановление вашей улыбки.</p>
+        <div class="hero-buttons">
+          <a href="tel:+79145878820" class="btn btn-primary">Записаться: 8 (914) 587-88-20</a>
+          <a href="#documents" class="btn btn-outline">Лицензия и правила</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="doctor-tag">Врач — стоматолог-ортопед</div>
+        <h2>Вартанян Артур Аршакович</h2>
+        <p>Первичная специализированная медико-санитарная помощь в амбулаторных условиях по ортопедической стоматологии.</p>
+        <ul class="info-list">
+          <li><span>Образование:</span> <strong>ИГМУ (2005 г., Стоматология)</strong></li>
+          <li><span>Специальность:</span> <strong>Стоматология ортопедическая</strong></li>
+          <li><span>Адрес приёма:</span> <strong>г. Свободный, ул. 50 лет Октября, д. 31</strong></li>
+          <li><span>Приём пациентов:</span> <strong>По предварительной записи</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- НАПРАВЛЕНИЯ И ПРИНЦИПЫ РАБОТЫ -->
+  <section id="services">
     <div class="container">
-      <div class="features-grid">
-        <div class="glass-panel reveal"><div class="feature-icon">👨‍⚕</div><h3>Опыт с 2005 года</h3><p>Прием ведет опытный врач-стоматолог-ортопед.</p></div>
-        <div class="glass-panel reveal" style="transition-delay: 0.2s;"><div class="feature-icon">💎</div><h3>Современный подход</h3><p>Используем только качественные материалы и технологии.</p></div>
-        <div class="glass-panel reveal" style="transition-delay: 0.4s;"><div class="feature-icon">🛡️</div><h3>Гарантия качества</h3><p>Официальный договор и гарантия на все виды протезирования.</p></div>
+      <div class="section-header">
+        <h2>Ортопедическая стоматология</h2>
+        <p>Мы приложим максимум усилий, чтобы вы получили качественную стоматологическую помощь и положительные эмоции</p>
       </div>
-    </div>
-  </section>
 
-  <section class="portfolio" id="portfolio">
-    <div class="container reveal">
-      <div class="section-title"><h2>Результаты работы</h2></div>
-      <div class="ba-container">
-        <div class="ba-img ba-after">ПОСЛЕ</div>
-        <div class="ba-img ba-before" id="before-img">ДО</div>
-        <div class="ba-line" id="ba-line"><div class="ba-btn hover-target">↔</div></div>
-        <input type="range" min="0" max="100" value="50" class="ba-slider hover-target" id="ba-slider">
-      </div>
-    </div>
-  </section>
-
-  <section class="services" id="services">
-    <div class="container reveal">
-      <div class="glass-panel">
-        <div class="section-title" style="margin-bottom: 30px;"><h2>Прейскурант на ортопедическую помощь</h2></div>
-        <div class="tabs-header">
-          <button class="tab-btn active hover-target" onclick="openTab('crowns')">Несъемные протезы</button>
-          <button class="tab-btn hover-target" onclick="openTab('removable')">Съемные протезы</button>
-          <button class="tab-btn hover-target" onclick="openTab('clasp')">Бюгельные протезы</button>
-          <button class="tab-btn hover-target" onclick="openTab('repair')">Ремонт протезов</button>
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🦷</div>
+          <h3>Консультация и диагностика</h3>
+          <p>Первичный осмотр, подробное информирование о состоянии зубов, составление индивидуального плана и согласование сроков протезирования.</p>
         </div>
 
-        <div id="crowns" class="tab-content active">
-          <div class="service-row"><div class="service-info"><h3>Коронка штампованная</h3><p>Восстановление зуба</p></div><div class="service-price">5 000 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Коронка цельнолитая (с напылением)</h3><p>Восстановление зуба</p></div><div class="service-price">6 500 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Коронка цельнолитая (без напыления)</h3><p>Восстановление зуба</p></div><div class="service-price">6 000 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Коронка металлокерамическая</h3><p>Восстановление зуба (1 ед.)</p></div><div class="service-price">9 500 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Коронка циркониевая</h3><p>С керамической облицовкой</p></div><div class="service-price">16 000 ₽</div></div>
+        <div class="card">
+          <div class="card-icon">✨</div>
+          <h3>Несъёмное протезирование</h3>
+          <p>Восстановление разрушенных зубов с помощью коронок и мостовидных конструкций с точным подбором цвета и анатомической формы.</p>
         </div>
 
-        <div id="removable" class="tab-content">
-          <div class="service-row"><div class="service-info"><h3>Полный съемный протез</h3><p>Акриловый</p></div><div class="service-price">14 000 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Частичный/Полный протез</h3><p>Нейлоновый или Acry-free</p></div><div class="service-price">36 000 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Съемный протез</h3><p>С металлическим каркасом</p></div><div class="service-price">40 000 ₽</div></div>
-        </div>
-
-        <div id="clasp" class="tab-content">
-          <div class="service-row"><div class="service-info"><h3>Бюгельный протез</h3><p>На кламмерах</p></div><div class="service-price">45 000 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Бюгельный протез</h3><p>На аттачменах</p></div><div class="service-price">70 000 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Бюгельный протез</h3><p>С нейлоновым базисом</p></div><div class="service-price">36 000 ₽</div></div>
-        </div>
-
-        <div id="repair" class="tab-content">
-          <div class="service-row"><div class="service-info"><h3>Устранение перелома базиса (починка)</h3><p>Один перелом</p></div><div class="service-price">2 000 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Замена или установка зуба в протезе</h3><p>За 1 дополнительный зуб</p></div><div class="service-price">2 500 ₽</div></div>
-          <div class="service-row"><div class="service-info"><h3>Замена или перенос кламмера</h3><p>Один кламмер</p></div><div class="service-price">2 000 ₽</div></div>
-        </div>
-        
-        <div style="text-align: center; margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.5);">
-          * Консультация врача-стоматолога-ортопеда: 500 ₽. Окончательная стоимость определяется после составления плана лечения. Внимание: цены носят ознакомительный характер.
+        <div class="card">
+          <div class="card-icon">🛡️</div>
+          <h3>Съёмное протезирование</h3>
+          <p>Изготовление комфортных и надёжных съёмных ортопедических конструкций при частичном или полном отсутствии зубов с гарантией по договору.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="faq" id="faq">
-    <div class="container reveal">
-      <div class="section-title"><h2>Частые вопросы</h2></div>
-      <div class="faq-list">
-        <div class="faq-item glass-panel hover-target" onclick="toggleFaq(this)">
-          <div class="faq-question"><span>Даете ли вы гарантию на работу?</span><span class="faq-icon">+</span></div>
-          <div class="faq-answer">Да, по всем гарантийным случаям работы выполняются абсолютно бесплатно. Срок гарантии прописывается в договоре.</div>
-        </div>
-        <div class="faq-item glass-panel hover-target" onclick="toggleFaq(this)">
-          <div class="faq-question"><span>Как происходит оплата?</span><span class="faq-icon">+</span></div>
-          <div class="faq-answer">Оплата проводится в день оказания услуги. Справка для налоговой (возврат подоходного налога) выдается по запросу.</div>
-        </div>
+  <!-- ОФИЦИАЛЬНЫЕ ДОКУМЕНТЫ (С ВЫПИСКОЙ И ПРАВИЛАМИ) -->
+  <section id="documents" class="docs-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Официальные документы</h2>
+        <p>Вы можете ознакомиться с документами прямо на сайте или скачать оригинальные файлы</p>
       </div>
-    </div>
-  </section>
 
-  <section class="contacts" id="contacts">
-    <div class="container reveal">
-      <div class="section-title"><h2>Ждем вас на приеме</h2></div>
-      <div class="contacts-grid">
-        <div class="glass-panel">
-          <div class="contact-item"><h4>Адрес</h4><p>г. Свободный, ул. 50 лет Октября, д. 33, каб. 206<br><span style="font-size:14px; color:rgba(255,255,255,0.6);">(общежитие ДОСААФ, 2 этаж, вход со двора)</span></p></div>
-          <div class="contact-item"><h4>Телефон</h4><p>+7 (914) 587-88-20</p></div>
-          <div class="contact-item"><h4>E-mail</h4><p>arik92ladra@yandex.ru</p></div>
-          <div class="contact-item"><h4>Режим работы</h4><p>Пн-Пт: 13:00 – 20:00<br>Сб-Вс: Выходной</p></div>
-          
-          <div class="contact-item" style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
-            <h4 style="color: #2acfc4; font-size: 14px; margin-bottom: 10px;">Памятка пациенту</h4>
-            <ul style="list-style: none; font-size: 13px; color: rgba(255,255,255,0.7); font-weight: 300;">
-              <li style="margin-bottom: 6px;">• Приходите за 10 минут до начала приема</li>
-              <li style="margin-bottom: 6px;">• Отмена записи не менее чем за 24 часа</li>
-              <li style="margin-bottom: 6px;">• Оплата наличными или картой в день приема</li>
-              <li>• Гарантийное обслуживание предоставляется бесплатно</li>
-            </ul>
+      <div class="cards-grid">
+        <!-- Карточка 1: Выписка из реестра лицензий -->
+        <div class="doc-card">
+          <div>
+            <span class="doc-badge">PDF • Росздравнадзор</span>
+            <h3>Выписка из реестра лицензий</h3>
+            <p class="doc-meta">
+              Регистрационный номер: <strong>Л041-01123-28/00289180</strong> от 06.09.2013 г.<br>
+              ИП Вартанян Артур Аршакович (ОГРНИП 313280706400037, ИНН 280721805368). Статус: <strong>действует</strong>.
+            </p>
           </div>
-
+          <div class="doc-actions">
+            <button type="button" class="btn-sm btn-read" onclick="openModal('modal-license')">
+              📖 Читать на сайте
+            </button>
+            <a href="vypiska.pdf" target="_blank" rel="noopener noreferrer" class="btn-sm btn-download">
+              ⬇ Открыть PDF
+            </a>
+          </div>
         </div>
-        <div class="map-container">
-          <iframe src="https://yandex.ru/map-widget/v1/?text=г.%20Свободный,%20ул.%2050%20лет%20Октября,%20д.%2033" width="100%" height="100%" frameborder="0" allowfullscreen="true" style="position:relative;"></iframe>
+
+        <!-- Карточка 2: Правила внутреннего распорядка -->
+        <div class="doc-card">
+          <div>
+            <span class="doc-badge">DOCX • Официальный документ</span>
+            <h3>Правила внутреннего распорядка для пациентов и посетителей</h3>
+            <p class="doc-meta">
+              Порядок записи и приёма, права и обязанности пациентов, правила оплаты, гарантийные обязательства и порядок ознакомления с медицинской документацией.
+            </p>
+          </div>
+          <div class="doc-actions">
+            <button type="button" class="btn-sm btn-read" onclick="openModal('modal-rules')">
+              📖 Читать полностью
+            </button>
+            <a href="pravila.docx" download class="btn-sm btn-download">
+              ⬇ Скачать DOCX
+            </a>
+          </div>
+        </div>
+
+        <!-- Карточка 3: Переход в полный правовой раздел -->
+        <div class="doc-card">
+          <div>
+            <span class="doc-badge">Инфо • Законодательство РФ</span>
+            <h3>Сведения о медицинской организации и контролирующих органах</h3>
+            <p class="doc-meta">
+              Полный перечень нормативных документов, адреса и телефоны контролирующих органов Амурской области и информация для пациентов.
+            </p>
+          </div>
+          <div class="doc-actions">
+            <a href="legal.html" class="btn-sm btn-read">
+              Перейти в раздел документации →
+            </a>
+            <a href="doctor.html" class="btn-sm btn-download">
+              Сведения о враче
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- КОНТАКТЫ -->
+  <section id="contacts">
+    <div class="container">
+      <div class="contacts-box">
+        <div>
+          <h2>Запись на приём и консультацию</h2>
+          <p>Приём пациентов на плановые консультации и лечение ведётся по предварительной записи по телефону. Пожалуйста, приходите за 10 минут до назначенного времени.</p>
+          <a href="tel:+79145878820" class="btn btn-primary" style="background: #ffffff; color: #0369a1;">
+            Позвонить: 8 (914) 587-88-20
+          </a>
+        </div>
+
+        <div>
+          <div class="contact-item">
+            <small>Адрес стоматологического кабинета</small>
+            <strong>676450, Амурская область, г. Свободный, ул. 50 лет Октября, д. 31 (Кабинет)</strong>
+          </div>
+          <div class="contact-item">
+            <small>Телефон для предварительной записи</small>
+            <a href="tel:+79145878820">8 (914) 587-88-20</a>
+          </div>
+          <div class="contact-item">
+            <small>Форма оплаты услуг</small>
+            <strong>Наличными в кассу / Банковскими картами</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПОДВАЛ -->
   <footer>
     <div class="container">
-      <p>&copy; 2026 Стоматологический кабинет «ВАА Стоматолог».</p>
-      <p><strong>ИП Вартанян Артур Аршакович</strong> | ИНН: 280721805368 | ОГРНИП: 313280706400037</p>
-      <p>Лицензия на осуществление медицинской деятельности № Л041-01123-28/00289180 от 06.09.2013 г.</p>
-      <p>Адрес осуществления деятельности: 676450, Амурская область, г. Свободный, ул. 50 лет Октября, д. 31.</p>
-      
-      <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
-        <a href="rules.html" style="text-decoration: underline; color: #2acfc4; font-weight: 500;" class="hover-target">Правила внутреннего распорядка для пациентов</a>
-        <a href="legal.html" style="text-decoration: underline; color: rgba(255,255,255,0.5);" class="hover-target">Прочая правовая информация</a>
+      <div class="footer-inner">
+        <div>
+          <strong style="color: #fff;">Стоматологический кабинет «ВАА Стоматолог»</strong><br>
+          ИП Вартанян Артур Аршакович • ОГРНИП 313280706400037 • ИНН 280721805368
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Главная</a>
+          <a href="doctor.html">Специалисты</a>
+          <a href="legal.html">Документация и Инфо</a>
+        </div>
+      </div>
+      <div>
+        © 2026 Стоматологический кабинет «ВАА Стоматолог». ИП Вартанян Артур Аршакович. Все права защищены.<br>
+        Имеются противопоказания, необходима консультация специалиста.
       </div>
     </div>
   </footer>
 
-  <div id="cookie-banner">
-    <div>
-      <p><strong>Используя этот сайт, вы соглашаетесь с использованием файлов cookie.</strong></p>
-      <p style="margin-top: 5px;">Мы используем cookie для корректной работы сайта и сбора обезличенной статистики. Продолжая навигацию, вы соглашаетесь с <a href="legal.html" style="color: #2acfc4; text-decoration: underline;">Политикой обработки персональных данных</a>.</p>
+  <!-- МОДАЛЬНОЕ ОКНО 1: ВЫПИСКА ИЗ РЕЕСТРА ЛИЦЕНЗИЙ -->
+  <div class="modal-overlay" id="modal-license" onclick="closeModalOnBg(event, 'modal-license')">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>Выписка из реестра лицензий</h3>
+        <button class="modal-close" onclick="closeModal('modal-license')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong>По состоянию на 06:52 16.11.2022 г.</strong> (сформирована на интернет-портале Росздравнадзора)</p>
+        <ul>
+          <li><strong>1. Статус лицензии:</strong> действует;</li>
+          <li><strong>2. Регистрационный номер лицензии:</strong> Л041-01123-28/00289180;</li>
+          <li><strong>3. Дата предоставления лицензии:</strong> 06.09.2013;</li>
+          <li><strong>4. Лицензирующий орган:</strong> Федеральная служба по надзору в сфере здравоохранения;</li>
+          <li><strong>5. Индивидуальный предприниматель:</strong> ФИО — Вартанян Артур Аршакович; ОГРНИП — 313280706400037;</li>
+          <li><strong>6. ИНН:</strong> 280721805368;</li>
+          <li><strong>7. Лицензируемый вид деятельности:</strong> Медицинская деятельность (за исключением указанной деятельности, осуществляемой медицинскими организациями и другими организациями, входящими в частную систему здравоохранения, на территории инновационного центра «Сколково»);</li>
+          <li><strong>8. Адрес места осуществления деятельности:</strong> 676450, Амурская область, г. Свободный, ул. 50 лет Октября, д. 31 (Кабинет).<br>
+          Выполняемые работы, оказываемые услуги (Приказ 866н): При оказании первичной медико-санитарной помощи организуются и выполняются следующие работы (услуги): при оказании первичной специализированной медико-санитарной помощи в амбулаторных условиях по: <strong>стоматологии ортопедической</strong>.</li>
+          <li><strong>9. Номер и дата приказа лицензирующего органа:</strong> № 6929 от 29.07.2022.</li>
+          <li><strong>10. Иные сведения:</strong> приказ/решение (внесение изменений в лицензию) № 6929 от 29.07.2022; приказ/решение (выдача лицензии) № 1027 от 06.09.2013.</li>
+        </ul>
+        <div style="margin-top: 20px;">
+          <a href="vypiska.pdf" target="_blank" class="btn-sm btn-read">Открыть оригинал PDF</a>
+        </div>
+      </div>
     </div>
-    <div class="btn-magnetic-wrap hover-target" style="margin: 0; padding: 0;">
-      <button class="btn magnetic-btn" onclick="acceptCookies()">Принять</button>
+  </div>
+
+  <!-- МОДАЛЬНОЕ ОКНО 2: ПРАВИЛА ВНУТРЕННЕГО РАСПОРЯДКА -->
+  <div class="modal-overlay" id="modal-rules" onclick="closeModalOnBg(event, 'modal-rules')">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>Правила внутреннего распорядка для пациентов и посетителей</h3>
+        <button class="modal-close" onclick="closeModal('modal-rules')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Главным принципом нашей работы является индивидуальный подход и уважение к каждому обратившемуся в стоматологический кабинет. Мы приложим максимум усилий, чтобы Вы получили качественную стоматологическую помощь и положительные эмоции. Для того чтобы процесс Вашего лечения проходил более организованно, просим Вас ознакомиться с правилами внутреннего распорядка, принятыми в нашем кабинете.</p>
+        <p>Правила внутреннего распорядка для пациентов и посетителей — это внутренний организационно-распорядительный документ, регламентирующий в соответствии с действующим законодательством поведение пациентов и посетителей в стоматологическом кабинете, а также иные вопросы, возникающие между участниками правоотношений — пациентом/заказчиком (его представителем) и лечебным учреждением (стоматологический кабинет). Настоящие правила обязательны для персонала кабинета и всех пациентов, их представителей, а также иных лиц, обратившихся в стоматологический кабинет.</p>
+
+        <h4>Порядок записи, приёма и оплаты</h4>
+        <p>Стоматологический кабинет является частной структурой и оказывает платные медицинские услуги. Прием пациентов на плановые консультации и лечение ведется по предварительной записи по телефону <strong>8 914 587-88-20</strong>.</p>
+        <p>В случае опоздания или неявки на приём пациенту желательно предупредить об этом удобным для него способом не менее чем за 24 часа.</p>
+        <p>При первичном осмотре врачом и опросе пациента все данные заносятся в медицинскую карту пациента. Медицинская карта пациента является собственностью стоматологического кабинета, хранится в кабинете, на руки не выдается (хранится в течение 5 лет, а далее в архиве). Информация о гарантийном сроке лечения прописывается в договоре. По всем гарантийным случаям работы выполняются бесплатно.</p>
+        <p>Стоимость оказанных услуг определяется согласно прейскуранту цен на платные стоматологические услуги. Оплата проводится в день оказания услуги в рублях: наличными в кассу или банковскими картами.</p>
+
+        <h4>Права пациента</h4>
+        <p>Пациент имеет право выбирать время приема у врача из имеющегося свободного; на охрану здоровья и медицинскую помощь; на уважительное и гуманное отношение; на обследование и лечение в условиях, соответствующих санитарно-гигиеническим требованиям; на облегчение боли доступными способами и средствами; на добровольное согласие на медицинское вмешательство и на отказ от него; на защиту сведений, составляющих врачебную тайну; на получение в доступной форме полной информации о состоянии своего здоровья, применяемых методах диагностики и лечения.</p>
+
+        <h4>Обязанности пациента</h4>
+        <p>Пациент обязан явиться на прием за 10 минут до назначенного времени; соблюдать правила внутреннего распорядка, режим работы кабинета, правила поведения в общественных местах и правила пожарной безопасности; оставлять верхнюю одежду в гардеробе, проходить в помещение в бахилах (можно получить у медсестры); выполнять предписания лечащего врача и сообщать необходимые сведения о перенесенных заболеваниях и аллергических реакциях; оплатить стоимость предоставленных услуг по факту их оказания.</p>
+
+        <h4>Разрешение споров и ознакомление с документацией</h4>
+        <p>В случае конфликтных ситуаций пациент имеет право непосредственно обратиться к руководителю кабинета. Претензии в письменном виде рассматриваются в течение 10 дней.</p>
+        <p>Пациент либо его законный представитель имеет право знакомиться с медицинской документацией на основании письменного запроса. В течение 10 дней врач перезвонит и пригласит пациента в стоматологический кабинет для ознакомления. Справка для налоговой инспекции по возврату подоходного налога выдается в течение 30 дней после обращения при наличии кассовых чеков или квитанций.</p>
+
+        <div style="margin-top: 20px;">
+          <a href="pravila.docx" download class="btn-sm btn-read">⬇ Скачать полный документ (DOCX)</a>
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    // Логика заставки (показывается красиво при входе)
+    window.addEventListener('load', function() {
+      const preloader = document.getElementById('preloader');
+      const delay = sessionStorage.getItem('vaa_visited') ? 350 : 1450;
+      sessionStorage.setItem('vaa_visited', 'true');
+      setTimeout(function() {
+        preloader.classList.add('hidden');
+      }, delay);
     });
 
-    if (window.innerWidth > 992) {
-      const cursorDot = document.getElementById('cursor-dot');
-      const cursorOutline = document.getElementById('cursor-outline');
-      
-      window.addEventListener('mousemove', function(e) {
-        cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
-        setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50);
-        const x = (e.clientX / window.innerWidth - 0.5) * 40; const y = (e.clientY / window.innerHeight - 0.5) * 40;
-        document.documentElement.style.setProperty('--mx', `${x}px`); document.documentElement.style.setProperty('--my', `${y}px`);
-      });
-
-      document.querySelectorAll('.hover-target, a, button').forEach(el => {
-        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-      });
-
-      document.querySelectorAll('.btn-magnetic-wrap').forEach(wrap => {
-        const btn = wrap.querySelector('.magnetic-btn');
-        if(!btn) return;
-        wrap.addEventListener('mousemove', (e) => {
-          if(document.body.classList.contains('a11y-mode')) return; 
-          const rect = wrap.getBoundingClientRect();
-          const h = rect.width / 2; const w = rect.height / 2;
-          const x = e.clientX - rect.left - h; const y = e.clientY - rect.top - w;
-          btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
-        });
-        wrap.addEventListener('mouseleave', () => btn.style.transform = `translate(0px, 0px)`);
-      });
+    // Модальные окна документов
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
-
-    let lastScroll = 0;
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      const header = document.getElementById('header');
-      if (currentScroll > lastScroll && currentScroll > 100 && !document.body.classList.contains('a11y-mode')) {
-        header.classList.add('hidden');
-      } else {
-        header.classList.remove('hidden');
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    function closeModalOnBg(event, id) {
+      if (event.target.id === id) {
+        closeModal(id);
       }
-      lastScroll = currentScroll;
-    });
-
-    document.getElementById('a11y-toggle').addEventListener('click', () => {
-      document.body.classList.toggle('a11y-mode');
-      const btn = document.getElementById('a11y-toggle');
-      if (document.body.classList.contains('a11y-mode')) {
-        btn.innerText = '👁 Обычная версия';
-        document.getElementById('header').classList.remove('hidden');
-      } else {
-        btn.innerText = '👁 Версия для слабовидящих';
-      }
-    });
-
-    function toggleFaq(element) { element.classList.toggle('active'); }
-
-    function openTab(tabName) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(tabName).classList.add('active');
-      event.currentTarget.classList.add('active');
-    }
-
-    const slider = document.getElementById('ba-slider');
-    const beforeImg = document.getElementById('before-img');
-    const baLine = document.getElementById('ba-line');
-    if (slider) {
-      slider.addEventListener('input', (e) => {
-        const val = e.target.value;
-        beforeImg.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
-        baLine.style.left = `${val}%`;
-      });
-    }
-
-    if (localStorage.getItem('cookieAccepted')) {
-      document.getElementById('cookie-banner').style.display = 'none';
-    }
-    function acceptCookies() {
-      localStorage.setItem('cookieAccepted', 'true');
-      document.getElementById('cookie-banner').style.display = 'none';
     }
   </script>
 </body>
